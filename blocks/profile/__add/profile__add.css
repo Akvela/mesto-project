@@ -1,0 +1,7 @@
+.profile__add {
+  width: 150px;
+  height: 50px;
+  padding: 35px 0 35px 0;
+  display: block;
+  cursor: pointer;
+}

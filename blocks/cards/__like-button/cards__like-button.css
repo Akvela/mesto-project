@@ -1,0 +1,15 @@
+.cards__like-button {
+  background-image: url(../../../images/union_v.png);
+  width: 22px;
+  height: 19px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 1;
+  transition: opacity .3s;
+  display: block;
+  
+}
+
+.cards__invisible-like-button[type="submit"]:hover + .cards__like-button {
+  opacity: .5;
+}

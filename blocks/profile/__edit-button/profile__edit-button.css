@@ -1,9 +1,13 @@
 .profile__edit-button {
   width: 24px;
   height: 24px;
+  display: block;
   background-image: url(../../../images/edit-button.png);
   background-repeat: no-repeat;
-  display: block;
-  margin-left: 18px;
-  margin-top: 37px;
+  opacity: 1;
+  transition: opacity .3s ease-in;
+}
+
+.profile__invisible-edit-button[type="submit"]:hover + .profile__edit-button {
+  opacity: .6;
 }
