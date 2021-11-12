@@ -13,6 +13,10 @@
   opacity: .6;
 }
 
+.profile__invisible-add-button[type="submit"]:focus + .profile__add-button {
+  outline: none;
+}
+
 @media screen and (max-width: 615px) {
   .profile__add-button {
     width: 282px;

@@ -13,3 +13,7 @@
 .cards__invisible-like-button[type="submit"]:hover + .cards__like-button {
   opacity: .5;
 }
+
+.cards__invisible-like-button[type="submit"]:focus + .cards__like-button {
+  outline: none;
+}

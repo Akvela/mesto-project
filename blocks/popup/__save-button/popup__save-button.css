@@ -13,6 +13,10 @@
   opacity: .8;
 }
 
+.popup__invisible-save-button[type="submit"]:focus + .popup__save-button {
+  outline: none;
+}
+
 @media screen and (max-width: 580px) {
   .popup__save-button {
     width: 238px;
