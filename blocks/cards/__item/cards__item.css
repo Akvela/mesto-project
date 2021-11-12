@@ -1,5 +1,5 @@
 .cards__item {
-  
+  list-style-type: none;
   width: 282px;
   height: 361px;
   background-color: #FFFFFF;

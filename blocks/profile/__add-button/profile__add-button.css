@@ -11,3 +11,11 @@
 .profile__invisible-add-button[type="submit"]:hover + .profile__add-button {
   opacity: .6;
 }
+
+@media screen and (max-width: 615px) {
+  .profile__add-button {
+    width: 282px;
+    height: 50px;
+    background-image: url(../../../images/add-button_l.png);
+  }
+}

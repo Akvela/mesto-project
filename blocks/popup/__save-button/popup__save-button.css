@@ -1,0 +1,15 @@
+.popup__save-button {
+  width: 358px;
+  height: 50px;
+  display: block;
+  background-image: url(../../../images/submit-button.png);
+  background-repeat: no-repeat;
+  opacity: 1;
+  transition: opacity .3s ease-in;
+  padding-top: 48px;
+  padding-left: 36px;
+}
+  
+.popup__invisible-save-button[type="submit"]:hover + .popup__save-button {
+  opacity: .8;
+}

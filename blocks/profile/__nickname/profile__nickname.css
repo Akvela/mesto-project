@@ -4,6 +4,6 @@
   font-weight: 500;
   margin: 0;
   display: block;
-  width: 294px;
+  min-width: 294px;
   height: 42px;
 }

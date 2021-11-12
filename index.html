@@ -7,94 +7,113 @@
     <title>Mesto</title>
 </head>
 <body>
-    <div class="page">
-        <header class="header">
-          <div class="header__logo"></div>
-        </header>
-        <main class="content">
-          <section class="profile">
-            <div class="profile__item">
-              <img src="./images/image.png" alt="Аватар" class="profile__avatar">
-              <div class="profile__info">
-                <h1 class="profile__nickname">Жак-Ив Кусто</h1>
-                <label class="profile__edit">
-                  <input type="submit" class="profile__invisible-edit-button">
-                  <span class="profile__edit-button"></span>
-                </label>
-                <p class="profile__text">Исследователь океана</p>             
-              </div>
-            </div>
-            <label class="profile__add">
-              <input type="submit" class="profile__invisible-add-button">
-              <span class="profile__add-button"></span>
+  <div class="page">
+    <header class="header">
+      <div class="header__logo"></div>
+    </header>
+    <main class="content">
+      <section class="popup">
+        <div class="popup__container">
+          <h2 class="popup__heading">Редактировать профиль</h2>
+          <fieldset class="popup__input-container">
+            <input type="text" class="popup__item" name="nickname" value="Жак-Ив Кусто" placeholder="Жак-Ив Кусто">
+            <input type="text" class="popup__item" name="text" value="Исследователь океана" placeholder="Исследователь океана">
+          </fieldset>
+          <label class="popup__save">
+            <input type="submit" class="popup__invisible-save-button">
+            <span class="popup__save-button"></span>
+          </label>
+          <label class="popup__exit">
+            <input type="submit" class="popup__invisible-exit-button">
+            <span class="popup__exit-button"></span>
+          </label>
+        </div>
+      </section>  
+      <section class="profile">
+        <div class="profile__item">
+          <img src="./images/image.png" alt="Аватар" class="profile__avatar">
+          <div class="profile__info">
+            <h1 class="profile__nickname">Жак-Ив Кусто</h1>
+            <label class="profile__edit">
+              <input type="submit" class="profile__invisible-edit-button">
+              <span class="profile__edit-button"></span>
             </label>
-          </section>
-          <section class="cards">
-            <article class="cards__item">  
-              <img src="./images/komi.jpg" class="cards__photo" alt="Коми">
-              <div class="cards__info">
-                <h2 class="cards__name">Коми</h2>
-                <label class="cards__like">
-                  <input type="submit" class="cards__invisible-like-button">
-                  <span class="cards__like-button"></span>
-                </label>
-              </div>
-            </article>
-            <article class="cards__item">  
-              <img src="./images/karelia.jpg" class="cards__photo" alt="Карелия">
-              <div class="cards__info">
-                <h2 class="cards__name">Карелия</h2>
-                <label class="cards__like">
-                  <input type="submit" class="cards__invisible-like-button">
-                  <span class="cards__like-button"></span>
-                </label>
-              </div>
-            </article>
-            <article class="cards__item">  
-              <img src="./images/zabaikalie.jpg" class="cards__photo" alt="Забайкалье">
-              <div class="cards__info">
-                <h2 class="cards__name">Забайкалье</h2>
-                <label class="cards__like">
-                  <input type="submit" class="cards__invisible-like-button">
-                  <span class="cards__like-button"></span>
-                </label>
-              </div>
-            </article>
-            <article class="cards__item">  
-              <img src="./images/yakutiya.jpg" class="cards__photo" alt="Якутия">
-              <div class="cards__info">
-                <h2 class="cards__name">Якутия</h2>
-                <label class="cards__like">
-                  <input type="submit" class="cards__invisible-like-button">
-                  <span class="cards__like-button"></span>
-                </label>
-              </div>
-            </article>
-            <article class="cards__item">  
-              <img src="./images/vladivistok.jpg" class="cards__photo" alt="Владивосток">
-              <div class="cards__info">
-                <h2 class="cards__name">Владивосток</h2>
-                <label class="cards__like">
-                  <input type="submit" class="cards__invisible-like-button">
-                  <span class="cards__like-button"></span>
-                </label>
-              </div>
-            </article>
-            <article class="cards__item">  
-              <img src="./images/karachaevo-cherkesiya.jpg" class="cards__photo" alt="Карачаево-Черкессия">
-              <div class="cards__info">
-                <h2 class="cards__name">Карачаево-Черкессия</h2>
-                <label class="cards__like">
-                  <input type="submit" class="cards__invisible-like-button">
-                  <span class="cards__like-button"></span>
-                </label>
-              </div>
-            </article>
-          </section>
-        </main>
-        <footer class="footer">
-          <h2 class="footer__copyright">© 2020 Mesto Russia</h2>
-        </footer>
-    </div>
+            <p class="profile__text">Исследователь океана</p>             
+          </div>
+        </div>
+        <label class="profile__add">
+          <input type="submit" class="profile__invisible-add-button">
+          <span class="profile__add-button"></span>
+        </label>
+      </section>
+      <section class="cards">
+        <ul class="cards__gallery">
+          <li class="cards__item">  
+            <img src="./images/komi.jpg" class="cards__photo" alt="Коми">
+            <div class="cards__info">
+              <h2 class="cards__name">Коми</h2>
+              <label class="cards__like">
+                <input type="submit" class="cards__invisible-like-button">
+                <span class="cards__like-button"></span>
+              </label>
+            </div>
+          </li>
+          <li class="cards__item">  
+            <img src="./images/karelia.jpg" class="cards__photo" alt="Карелия">
+            <div class="cards__info">
+              <h2 class="cards__name">Карелия</h2>
+              <label class="cards__like">
+                <input type="submit" class="cards__invisible-like-button">
+                <span class="cards__like-button"></span>
+              </label>
+            </div>
+          </li>
+          <li class="cards__item">  
+            <img src="./images/zabaikalie.jpg" class="cards__photo" alt="Забайкалье">
+            <div class="cards__info">
+              <h2 class="cards__name">Забайкалье</h2>
+              <label class="cards__like">
+                <input type="submit" class="cards__invisible-like-button">
+                <span class="cards__like-button"></span>
+              </label>
+            </div>
+          </li>
+          <li class="cards__item">  
+            <img src="./images/yakutiya.jpg" class="cards__photo" alt="Якутия">
+            <div class="cards__info">
+              <h2 class="cards__name">Якутия</h2>
+              <label class="cards__like">
+                <input type="submit" class="cards__invisible-like-button">
+                <span class="cards__like-button"></span>
+              </label>
+            </div>
+          </li>
+          <li class="cards__item">  
+            <img src="./images/vladivistok.jpg" class="cards__photo" alt="Владивосток">
+            <div class="cards__info">
+              <h2 class="cards__name">Владивосток</h2>
+              <label class="cards__like">
+                <input type="submit" class="cards__invisible-like-button">
+                <span class="cards__like-button"></span>
+              </label>
+            </div>
+          </li>
+          <li class="cards__item">  
+            <img src="./images/karachaevo-cherkesiya.jpg" class="cards__photo" alt="Карачаево-Черкессия">
+            <div class="cards__info">
+              <h2 class="cards__name">Карачаево-Черкессия</h2>
+              <label class="cards__like">
+                <input type="submit" class="cards__invisible-like-button">
+                <span class="cards__like-button"></span>
+              </label>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">© 2020 Mesto Russia</p>
+    </footer>
+  </div>
 </body>
 </html>
