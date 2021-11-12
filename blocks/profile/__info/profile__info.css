@@ -1,10 +1,15 @@
 .profile__info {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 30px;
-  padding-right: 30px;
   width: 336px;
   height: 73px;
-  padding-top: 22px;
-  padding-bottom: 25px;
+  padding: 22px 30px 25px 30px;
+}
+
+@media screen and (max-width: 420px) {
+  .profile__info {
+    padding: 26px 19px 36px 19px;
+    width: 282px;
+    height: 54px;
+  }
 }

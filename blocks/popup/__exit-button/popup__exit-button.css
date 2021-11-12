@@ -14,3 +14,13 @@
 .popup__invisible-exit-button[type="submit"]:hover + .popup__exit-button {
   opacity: .6;
 }
+
+@media screen and (max-width: 580px) {
+  .popup__exit-button {
+    width: 20px;
+    height: 20px;
+    background-size: cover;
+    top: -36px;
+    right: 0;
+  }
+}

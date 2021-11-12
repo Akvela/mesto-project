@@ -18,11 +18,11 @@
 }
 
 @media screen and (max-width: 620px) {
-    .cards__gallery {
-      grid-template-columns: repeat(1, 1fr);
-      grid-template-rows: repeat(6, 1fr);
-      max-width: 282px;
-      padding-left: 19px;
-      padding-right: 19px;
-    }  
-  }
+  .cards__gallery {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    max-width: 282px;
+    padding-left: 19px;
+    padding-right: 19px;
+  }  
+}

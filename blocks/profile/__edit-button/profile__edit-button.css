@@ -11,3 +11,11 @@
 .profile__invisible-edit-button[type="submit"]:hover + .profile__edit-button {
   opacity: .6;
 }
+
+@media screen and (max-width: 420px) {
+  .profile__edit-button {
+    width: 18px;
+    height: 18px;
+    background-size: cover;
+  }
+}

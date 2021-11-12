@@ -2,7 +2,7 @@
   width: 358px;
   height: 50px;
   display: block;
-  background-image: url(../../../images/submit-button.png);
+  background-image: url(../../../images/submit-button-l.png);
   background-repeat: no-repeat;
   opacity: 1;
   transition: opacity .3s ease-in;
@@ -12,4 +12,14 @@
   
 .popup__invisible-save-button[type="submit"]:hover + .popup__save-button {
   opacity: .8;
+}
+
+@media screen and (max-width: 580px) {
+  .popup__save-button {
+    width: 238px;
+    height: 46px;
+    background-image: url(../../../images/submit-button.png);
+    padding-top: 45px;
+    padding-left: 22px;
+  }
 }

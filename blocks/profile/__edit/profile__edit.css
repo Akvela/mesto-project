@@ -6,3 +6,12 @@
   margin-top: 15px;
   cursor: pointer;
 }
+
+@media screen and (max-width: 420px) {
+  .profile__edit {
+    width: 18px;
+    height: 18px;
+    margin-left: 10px;
+    margin-top: 8px;
+  }
+}

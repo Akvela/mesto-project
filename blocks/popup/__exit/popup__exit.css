@@ -4,3 +4,11 @@
   width: 32px;
   height: 32px;
 }
+
+@media screen and (max-width: 580px) {
+  .popup__exit {
+    width: 20px;
+    height: 20px;
+  }
+}
+

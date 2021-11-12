@@ -3,5 +3,13 @@
   width: 142px;
   background-image: url(../../../images/Vector.png);
   background-repeat: no-repeat;
-  
+}
+
+@media screen and (max-width: 420px) {
+  .header__logo {
+    height: 24.4px;
+    width: 103.74px;
+    background-size: contain;
+    padding-bottom: 31.6px;
+  }
 }

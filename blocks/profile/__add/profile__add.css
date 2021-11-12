@@ -12,3 +12,10 @@
     height: 50px;
   }
 }
+
+
+@media screen and (max-width: 420px) {
+  .profile__add {
+    padding: 0 0 36px 0;
+  }
+}
