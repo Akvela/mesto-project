@@ -6,6 +6,7 @@
   background-repeat: no-repeat;
   opacity: 1;
   transition: opacity .3s ease-in;
+  cursor: pointer;
 }
 
 .profile__invisible-add-button[type="submit"]:hover + .profile__add-button {

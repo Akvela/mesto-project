@@ -6,8 +6,7 @@
   background-repeat: no-repeat;
   opacity: 1;
   transition: opacity .3s ease-in;
-  padding-top: 48px;
-  padding-left: 36px;
+  margin-top: 48px;
 }
   
 .popup__invisible-save-button[type="submit"]:hover + .popup__save-button {
@@ -19,7 +18,6 @@
     width: 238px;
     height: 46px;
     background-image: url(../../../images/submit-button.png);
-    padding-top: 45px;
-    padding-left: 22px;
+    margin-top: 45px;
   }
 }

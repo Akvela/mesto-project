@@ -1,9 +1,9 @@
 .popup__save {
   width: 358px;
   height: 50px;
-  padding-top: 48px;
+  margin-top: 48px;
   display: block;
-  padding-left: 36px;
+  margin-left: 36px;
   cursor: pointer;
 }
 
@@ -11,7 +11,7 @@
   .popup__save {
     width: 238px;
     height: 46px;
-    padding-top: 45px;
-    padding-left: 22px;
+    margin-top: 45px;
+    margin-left: 22px;
   }
 }

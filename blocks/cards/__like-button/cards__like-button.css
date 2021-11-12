@@ -7,7 +7,7 @@
   opacity: 1;
   transition: opacity .3s;
   display: block;
-  
+  cursor: pointer;
 }
 
 .cards__invisible-like-button[type="submit"]:hover + .cards__like-button {

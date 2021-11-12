@@ -1,9 +1,9 @@
 .profile__add {
   width: 150px;
   height: 50px;
-  padding: 35px 0 35px 0;
+  margin: 35px 0 35px 0;
   display: block;
-  cursor: pointer;
+  
 }
 
 @media screen and (max-width: 615px) {
@@ -16,6 +16,6 @@
 
 @media screen and (max-width: 420px) {
   .profile__add {
-    padding: 0 0 36px 0;
+    margin: 0 0 36px 0;
   }
 }
