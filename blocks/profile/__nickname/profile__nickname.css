@@ -4,8 +4,10 @@
   font-weight: 500;
   margin: 0;
   display: block;
-  min-width: 294px;
-  height: 42px;
+  max-width: 294px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap; 
 }
 
 @media screen and (max-width: 420px) {
@@ -13,7 +15,6 @@
     font-size: 27px;
     line-height: 33px;
     min-width: 189px;
-    height: 26px;
     padding-left: 46px;
   }
 }

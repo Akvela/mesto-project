@@ -2,18 +2,22 @@
   width: 150px;
   height: 50px;
   display: block;
-  background-image: url(../../../images/add-button.png);
+  background-image: url(../../../images/add_button.svg);
   background-repeat: no-repeat;
   opacity: 1;
   transition: opacity .3s ease-in;
   cursor: pointer;
+  margin: 35px 0 35px 0;
+  border: none;
+  background-color: transparent;
+  border-radius: 2px;
 }
 
-.profile__invisible-add-button[type="submit"]:hover + .profile__add-button {
+.profile__add-button[type="button"]:hover {
   opacity: .6;
 }
 
-.profile__invisible-add-button[type="submit"]:focus + .profile__add-button {
+.profile__add-button[type="button"]:focus {
   outline: none;
 }
 
@@ -21,7 +25,12 @@
   .profile__add-button {
     width: 282px;
     height: 50px;
-    background-image: url(../../../images/add-button_l.png);
+    background-image: url(../../../images/add_button_l.svg);
   }
 }
 
+@media screen and (max-width: 420px) {
+  .profile__add-button {
+    margin: 0 0 36px 0;
+  }
+}

@@ -2,16 +2,20 @@
   width: 32px;
   height: 32px;
   display: block;
-  background-image: url(../../../images/close-icon.png);
+  background-image: url(../../../images/close-icon.svg);
+  background-color: transparent;
   background-repeat: no-repeat;
+  border: 0;
   opacity: 1;
   transition: opacity .3s ease-in;
   position: absolute;
   top: -40px;
   right: -40px;
+  cursor: pointer;
+  padding: 0;
 }
   
-.popup__invisible-exit-button[type="submit"]:hover + .popup__exit-button {
+.popup__exit-button[type="button"]:hover {
   opacity: .6;
 }
 

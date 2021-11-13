@@ -2,13 +2,18 @@
   width: 24px;
   height: 24px;
   display: block;
-  background-image: url(../../../images/edit-button.png);
+  background-image: url(../../../images/edit_button.svg);
+  margin-left: 18px;
+  margin-top: 15px;
+  cursor: pointer;
   background-repeat: no-repeat;
   opacity: 1;
   transition: opacity .3s ease-in;
+  border: none;
+  background-color: transparent;
 }
 
-.profile__invisible-edit-button[type="submit"]:hover + .profile__edit-button {
+.profile__edit-button[type="button"]:hover {
   opacity: .6;
 }
 
@@ -17,5 +22,7 @@
     width: 18px;
     height: 18px;
     background-size: cover;
+    margin-left: 10px;
+    margin-top: 8px;
   }
 }

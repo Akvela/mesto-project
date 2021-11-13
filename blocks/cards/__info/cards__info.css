@@ -2,8 +2,7 @@
   background-color: #FFFFFF;
   display: flex;
   justify-content: space-between;
-  width: 282px;
-  height: 79px;
+  width: 282px; 
   border-radius: 0 0 10px 10px;
   box-sizing: border-box;
 }

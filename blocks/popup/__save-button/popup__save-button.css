@@ -2,18 +2,27 @@
   width: 358px;
   height: 50px;
   display: block;
-  background-image: url(../../../images/submit-button-l.png);
-  background-repeat: no-repeat;
+  background-color: #000000;
+  color: #FFFFFF;
   opacity: 1;
   transition: opacity .3s ease-in;
   margin-top: 48px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  border: none;
+  padding: 0;
+  border-radius: 2px;
+  margin-left: 36px;
+  margin-bottom: 37px;
+  cursor: pointer;
 }
   
-.popup__invisible-save-button[type="submit"]:hover + .popup__save-button {
+.popup__save-button[type="button"]:hover {
   opacity: .8;
 }
 
-.popup__invisible-save-button[type="submit"]:focus + .popup__save-button {
+.popup__save-button[type="button"]:focus {
   outline: none;
 }
 
@@ -21,7 +30,10 @@
   .popup__save-button {
     width: 238px;
     height: 46px;
-    background-image: url(../../../images/submit-button.png);
     margin-top: 45px;
+    margin-left: 22px;
+    margin-bottom: 25px;
+    font-size: 14px;
+    line-height: 17px;
   }
 }

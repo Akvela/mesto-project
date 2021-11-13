@@ -1,5 +1,6 @@
 .cards__like-button {
-  background-image: url(../../../images/union_v.png);
+  background-image: url(../../../images/union_v.svg);
+  background-color: transparent;
   width: 22px;
   height: 19px;
   background-size: contain;
@@ -8,12 +9,16 @@
   transition: opacity .3s;
   display: block;
   cursor: pointer;
+  margin-top: 30px;
+  margin-right: 20px;
+  border: 0;
+  padding: 0;
 }
 
-.cards__invisible-like-button[type="submit"]:hover + .cards__like-button {
+.cards__like-button[type="button"]:hover {
   opacity: .5;
 }
 
-.cards__invisible-like-button[type="submit"]:focus + .cards__like-button {
+.cards__like-button[type="button"]:focus {
   outline: none;
 }

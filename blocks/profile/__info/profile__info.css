@@ -2,7 +2,6 @@
   display: flex;
   flex-wrap: wrap;
   width: 336px;
-  height: 73px;
   padding: 22px 30px 25px 30px;
 }
 
@@ -10,6 +9,5 @@
   .profile__info {
     padding: 26px 19px 36px 19px;
     width: 282px;
-    height: 54px;
   }
 }

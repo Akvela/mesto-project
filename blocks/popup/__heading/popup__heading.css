@@ -9,7 +9,7 @@
   padding-left: 36px;
   display: block;
   max-width: 330px;
-  height: 23px;
+  
 }
 
 @media screen and (max-width: 580px) {
@@ -20,6 +20,5 @@
     padding-bottom: 45px;
     padding-left: 22px;
     max-width: 238px;
-    height: 22px;
   }
 }
