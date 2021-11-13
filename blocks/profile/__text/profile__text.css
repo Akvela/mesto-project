@@ -1,9 +1,9 @@
 .profile__text {
   font-size: 18px;
-  line-height: 12px;
+  line-height: 22px;
   font-weight: 400;
   margin: 0;
-  padding-top: 16px;
+  padding-top: 6px;
   text-overflow: ellipsis;
   max-width: 336px;
   overflow: hidden;
