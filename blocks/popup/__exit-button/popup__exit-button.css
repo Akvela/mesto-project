@@ -15,7 +15,7 @@
   padding: 0;
 }
   
-.popup__exit-button[type="button"]:hover {
+.popup__exit-button:hover {
   opacity: .6;
 }
 

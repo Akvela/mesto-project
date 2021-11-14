@@ -18,11 +18,11 @@
   cursor: pointer;
 }
   
-.popup__save-button[type="button"]:hover {
+.popup__save-button:hover {
   opacity: .8;
 }
 
-.popup__save-button[type="button"]:focus {
+.popup__save-button:focus {
   outline: none;
 }
 

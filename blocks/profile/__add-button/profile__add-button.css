@@ -13,11 +13,11 @@
   border-radius: 2px;
 }
 
-.profile__add-button[type="button"]:hover {
+.profile__add-button:hover {
   opacity: .6;
 }
 
-.profile__add-button[type="button"]:focus {
+.profile__add-button:focus {
   outline: none;
 }
 

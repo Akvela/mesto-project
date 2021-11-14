@@ -13,7 +13,7 @@
   background-color: transparent;
 }
 
-.profile__edit-button[type="button"]:hover {
+.profile__edit-button:hover {
   opacity: .6;
 }
 

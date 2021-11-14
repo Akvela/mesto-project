@@ -15,10 +15,10 @@
   padding: 0;
 }
 
-.cards__like-button[type="button"]:hover {
+.cards__like-button:hover {
   opacity: .5;
 }
 
-.cards__like-button[type="button"]:focus {
+.cards__like-button:focus {
   outline: none;
 }

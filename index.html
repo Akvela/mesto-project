@@ -17,11 +17,11 @@
           <img src="./images/image.png" alt="Аватар" class="profile__avatar">
           <div class="profile__info">
             <h1 class="profile__nickname">Жак-Ив Кусто</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button type="button" class="profile__edit-button" aria-label="Редактирование"></button>
             <p class="profile__text">Исследователь океана</p>             
           </div>
         </div>
-        <button type="button" class="profile__add-button"></button>
+        <button type="button" class="profile__add-button" aria-label="Добавить"></button>
       </section>
       <section class="cards">
         <ul class="cards__gallery">
@@ -29,42 +29,42 @@
             <img src="./images/komi.jpg" class="cards__photo" alt="Коми">
             <div class="cards__info">
               <h2 class="cards__name">Коми</h2>
-              <button type="button" class="cards__like-button"></button> 
+              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
             </div>
           </li>
           <li class="cards__item">  
             <img src="./images/karelia.jpg" class="cards__photo" alt="Карелия">
             <div class="cards__info">
               <h2 class="cards__name">Карелия</h2>
-              <button type="button" class="cards__like-button"></button> 
+              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
             </div>
           </li>
           <li class="cards__item">  
             <img src="./images/zabaikalie.jpg" class="cards__photo" alt="Забайкалье">
             <div class="cards__info">
               <h2 class="cards__name">Забайкалье</h2>
-              <button type="button" class="cards__like-button"></button> 
+              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
             </div>
           </li>
           <li class="cards__item">  
             <img src="./images/yakutiya.jpg" class="cards__photo" alt="Якутия">
             <div class="cards__info">
               <h2 class="cards__name">Якутия</h2>
-              <button type="button" class="cards__like-button"></button> 
+              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
             </div>
           </li>
           <li class="cards__item">  
             <img src="./images/vladivistok.jpg" class="cards__photo" alt="Владивосток">
             <div class="cards__info">
               <h2 class="cards__name">Владивосток</h2>
-              <button type="button" class="cards__like-button"></button> 
+              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
             </div>
           </li>
           <li class="cards__item">  
             <img src="./images/karachaevo-cherkesiya.jpg" class="cards__photo" alt="Карачаево-Черкессия">
             <div class="cards__info">
               <h2 class="cards__name">Карачаево-Черкессия</h2>
-              <button type="button" class="cards__like-button"></button> 
+              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
             </div>
           </li>
         </ul>
@@ -72,14 +72,14 @@
       <div class="popup">
         <div class="popup__container">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form name="info">
+          <form name="form-info">
             <fieldset class="popup__input-container">
-              <input type="text" class="popup__item" name="nickname" value="Жак-Ив Кусто" placeholder="Жак-Ив Кусто" required>
-              <input type="text" class="popup__item" name="text" value="Исследователь океана" placeholder="Исследователь океана">
+              <input type="text" class="popup__item" name="nickname" placeholder="Жак-Ив Кусто" required>
+              <input type="text" class="popup__item" name="text" placeholder="Исследователь океана">
             </fieldset> 
-            <button type="button" class="popup__save-button">Сохранить</button>
+            <button type="submit" class="popup__save-button">Сохранить</button>
           </form>
-          <button type="button" class="popup__exit-button"></button>  
+          <button type="button" class="popup__exit-button" aria-label="Выйти"></button>  
         </div>
       </div>
     </main>

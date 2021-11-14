@@ -14,7 +14,7 @@
   .profile__nickname {
     font-size: 27px;
     line-height: 33px;
-    min-width: 189px;
+    max-width: 189px;
     padding-left: 46px;
   }
 }
