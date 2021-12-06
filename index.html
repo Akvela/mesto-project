@@ -69,7 +69,7 @@
           </li>
         </ul>
       </section>
-      <div class="popup">
+      <div class="popup" id="edit-info">
         <div class="popup__container">
           <h2 class="popup__heading">Редактировать профиль</h2>
           <form name="form-info">
@@ -82,10 +82,24 @@
           <button type="button" class="popup__exit-button" aria-label="Выйти"></button>  
         </div>
       </div>
+      <div class="popup" id="add-card">
+        <div class="popup__container">
+          <h2 class="popup__heading">Новое место</h2>
+          <form name="form-place">
+            <fieldset class="popup__input-container">
+              <input type="text" class="popup__item popup__item_place" name="place" placeholder="Название" required>
+              <input type="text" class="popup__item popup__item_place" name="url-card" placeholder="Ссылка на картинку">
+            </fieldset> 
+            <button type="submit" class="popup__save-button">Создать</button>
+          </form>
+          <button type="button" class="popup__exit-button" aria-label="Выйти"></button>  
+        </div>
+      </div>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
   </div>
+  <script src="./scripts/index.js"></script>
 </body>
 </html>
