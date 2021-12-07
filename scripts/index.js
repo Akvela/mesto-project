@@ -26,9 +26,9 @@ const initialCards = [
 ]; 
 
 const buttonEdit = document.querySelector('.profile__edit-button');
-const popupEdit = document.querySelector('#edit-info')
+const popupEdit = document.querySelector('#edit-info');
 const buttonExit = document.querySelectorAll('.popup__exit-button');
-const buttonPlus = document.querySelector('.profile__add-button')
+const buttonPlus = document.querySelector('.profile__add-button');
 const popupAddPlace = document.querySelector('#add-card');
 
 buttonEdit.addEventListener('click', function () {
@@ -44,9 +44,11 @@ function closePopup() {
   popupAddPlace.classList.remove('popup_opened');
 }
 
-for (let i = 0; i < buttonExit.length; i++) { 
-  buttonExit[i].addEventListener("click", closePopup); 
-} 
+document.addEventListener('DOMContentLoaded', function() {
+  for (let i = 0; i < buttonExit.length; i++) { 
+    buttonExit[i].addEventListener("click", closePopup); 
+  } 
+});
 
 const formElement = document.querySelector('[name="form-info"]');
 const nameInput = document.querySelector('[name="nickname"]');
