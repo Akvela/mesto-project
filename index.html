@@ -24,50 +24,9 @@
         <button type="button" class="profile__add-button" aria-label="Добавить"></button>
       </section>
       <section class="cards">
-        <ul class="cards__gallery">
-          <li class="cards__item">  
-            <img src="./images/komi.jpg" class="cards__photo" alt="Коми">
-            <div class="cards__info">
-              <h2 class="cards__name">Коми</h2>
-              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
-            </div>
-          </li>
-          <li class="cards__item">  
-            <img src="./images/karelia.jpg" class="cards__photo" alt="Карелия">
-            <div class="cards__info">
-              <h2 class="cards__name">Карелия</h2>
-              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
-            </div>
-          </li>
-          <li class="cards__item">  
-            <img src="./images/zabaikalie.jpg" class="cards__photo" alt="Забайкалье">
-            <div class="cards__info">
-              <h2 class="cards__name">Забайкалье</h2>
-              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
-            </div>
-          </li>
-          <li class="cards__item">  
-            <img src="./images/yakutiya.jpg" class="cards__photo" alt="Якутия">
-            <div class="cards__info">
-              <h2 class="cards__name">Якутия</h2>
-              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
-            </div>
-          </li>
-          <li class="cards__item">  
-            <img src="./images/vladivistok.jpg" class="cards__photo" alt="Владивосток">
-            <div class="cards__info">
-              <h2 class="cards__name">Владивосток</h2>
-              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
-            </div>
-          </li>
-          <li class="cards__item">  
-            <img src="./images/karachaevo-cherkesiya.jpg" class="cards__photo" alt="Карачаево-Черкессия">
-            <div class="cards__info">
-              <h2 class="cards__name">Карачаево-Черкессия</h2>
-              <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
-            </div>
-          </li>
-        </ul>
+        <div class="cards__gallery">
+
+        </div>
       </section>
       <div class="popup" id="edit-info">
         <div class="popup__container">
@@ -96,6 +55,17 @@
         </div>
       </div>
     </main>
+
+    <template id="card">
+      <div class="cards__item">  
+        <img src="./images/komi.jpg" class="cards__photo" alt="Коми">
+        <div class="cards__info">
+          <h2 class="cards__name">Коми</h2>
+          <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
+        </div>
+      </div>
+    </template>
+
     <footer class="footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>

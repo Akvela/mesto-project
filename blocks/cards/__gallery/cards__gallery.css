@@ -3,24 +3,20 @@
   margin: 0;
   display: grid;
   max-width: 880px;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, 282px);
   gap: 20px 17px;
   margin: 0 auto;
+  
 }
 
 @media screen and (max-width: 950px) {
   .cards__gallery {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(3, 1fr);
     max-width: 581px;
   }  
 }
 
 @media screen and (max-width: 620px) {
   .cards__gallery {
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(6, 1fr);
     max-width: 282px;
     padding-left: 19px;
     padding-right: 19px;

@@ -25,6 +25,22 @@ const initialCards = [
   }
 ]; 
 
+const cardsContainer = document.querySelector('.cards__gallery');
+const cardTemplate = document.querySelector('#card').content;
+const cardElement = cardTemplate.querySelector('.cards__item');
+
+function addCards(initialCards) {
+  initialCards.forEach(function(item) {
+    let cardElementCopy = cardElement.cloneNode(true);
+    cardElementCopy.querySelector('.cards__name').textContent = item.name;
+    cardElementCopy.querySelector('.cards__photo').src = item.link;
+    cardsContainer.prepend(cardElementCopy);
+  });
+}
+
+addCards(initialCards);
+
+const addButton = document.querySelector('.popup__save-button');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('#edit-info');
 const buttonExit = document.querySelectorAll('.popup__exit-button');
@@ -50,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
   } 
 });
 
-const formElement = document.querySelector('[name="form-info"]');
+const formInfoElement = document.querySelector('[name="form-info"]');
 const nameInput = document.querySelector('[name="nickname"]');
 const jobInput = document.querySelector('[name="text"]');
 const nameProfile = document.querySelector('.profile__nickname');
@@ -63,5 +79,19 @@ function formSubmitHandler (evt) {
   closePopup();
 }
 
-formElement.addEventListener('submit', formSubmitHandler); 
+formInfoElement.addEventListener('submit', formSubmitHandler); 
 
+const formCardElement = document.querySelector('[name="form-place"]');
+const placeInput = document.querySelector('[name="place"]');
+const urlCardInput = document.querySelector('[name="url-card"]');
+
+function addNewCard (evt) {
+  evt.preventDefault();
+  cardElementCopy = cardElement.cloneNode(true);
+  cardElementCopy.querySelector('.cards__name').textContent = placeInput.value;
+  cardElementCopy.querySelector('.cards__photo').src = urlCardInput.value;
+  cardsContainer.prepend(cardElementCopy);
+  closePopup();
+}
+
+formCardElement.addEventListener('submit', addNewCard);
