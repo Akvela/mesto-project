@@ -85,13 +85,36 @@ const formCardElement = document.querySelector('[name="form-place"]');
 const placeInput = document.querySelector('[name="place"]');
 const urlCardInput = document.querySelector('[name="url-card"]');
 
+function pressLike() {
+  let buttonLike = document.querySelectorAll('.cards__like-button');
+  for (let i = 0; i < buttonLike.length; i++) { 
+    buttonLike[i].addEventListener("click", function () {
+      buttonLike[i].classList.toggle('cards__like-button_active');
+    }); 
+  };
+};
+
 function addNewCard (evt) {
   evt.preventDefault();
   cardElementCopy = cardElement.cloneNode(true);
   cardElementCopy.querySelector('.cards__name').textContent = placeInput.value;
   cardElementCopy.querySelector('.cards__photo').src = urlCardInput.value;
   cardsContainer.prepend(cardElementCopy);
+  pressLike();
+  deleteCard();
   closePopup();
 }
 
 formCardElement.addEventListener('submit', addNewCard);
+
+function deleteCard() {
+  let buttonDelete = document.querySelectorAll('.cards__trash-button');
+  for (let i = 0; i < buttonDelete.length; i++) { 
+    buttonDelete[i].addEventListener("click", function () {
+      buttonDelete[i].closest('.cards__item').remove();
+    }); 
+  };
+};
+
+deleteCard();
+pressLike();
