@@ -31,7 +31,7 @@ const cardElement = cardTemplate.querySelector('.cards__item');
 
 function addCards(initialCards) {
   initialCards.forEach(function(item) {
-    let cardElementCopy = cardElement.cloneNode(true);
+    const cardElementCopy = cardElement.cloneNode(true);
     cardElementCopy.querySelector('.cards__name').textContent = item.name;
     cardElementCopy.querySelector('.cards__photo').src = item.link;
     cardsContainer.prepend(cardElementCopy);
@@ -40,7 +40,6 @@ function addCards(initialCards) {
 
 addCards(initialCards);
 
-const addButton = document.querySelector('.popup__save-button');
 const buttonEdit = document.querySelector('.profile__edit-button');
 const popupEdit = document.querySelector('#edit-info');
 const buttonExit = document.querySelectorAll('.popup__exit-button');
@@ -53,17 +52,6 @@ buttonEdit.addEventListener('click', function () {
 
 buttonPlus.addEventListener('click', function () {
   popupAddPlace.classList.add('popup_opened');
-}); 
-
-function closePopup() {
-  popupEdit.classList.remove('popup_opened');
-  popupAddPlace.classList.remove('popup_opened');
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-  for (let i = 0; i < buttonExit.length; i++) { 
-    buttonExit[i].addEventListener("click", closePopup); 
-  } 
 });
 
 const formInfoElement = document.querySelector('[name="form-info"]');
@@ -85,36 +73,71 @@ const formCardElement = document.querySelector('[name="form-place"]');
 const placeInput = document.querySelector('[name="place"]');
 const urlCardInput = document.querySelector('[name="url-card"]');
 
-function pressLike() {
-  let buttonLike = document.querySelectorAll('.cards__like-button');
-  for (let i = 0; i < buttonLike.length; i++) { 
-    buttonLike[i].addEventListener("click", function () {
-      buttonLike[i].classList.toggle('cards__like-button_active');
-    }); 
+function deleteCard() {
+  let buttonDelete = document.querySelectorAll('.cards__trash-button');
+  for (let i = 0; i < buttonDelete.length; i++) {
+    buttonDelete[i].addEventListener("click", function () {
+      buttonDelete[i].closest('.cards__item').remove();
+    });
   };
 };
+
 
 function addNewCard (evt) {
   evt.preventDefault();
   cardElementCopy = cardElement.cloneNode(true);
   cardElementCopy.querySelector('.cards__name').textContent = placeInput.value;
   cardElementCopy.querySelector('.cards__photo').src = urlCardInput.value;
+  pressLike();
+  showPhoto();
+  deleteCard();
   cardsContainer.prepend(cardElementCopy);
   pressLike();
+  showPhoto();
   deleteCard();
   closePopup();
 }
 
 formCardElement.addEventListener('submit', addNewCard);
 
-function deleteCard() {
-  let buttonDelete = document.querySelectorAll('.cards__trash-button');
-  for (let i = 0; i < buttonDelete.length; i++) { 
-    buttonDelete[i].addEventListener("click", function () {
-      buttonDelete[i].closest('.cards__item').remove();
-    }); 
+function pressLike() {
+  let buttonLike = document.querySelectorAll('.cards__like-button');
+  for (let i = 0; i < buttonLike.length; i++) {
+    buttonLike[i].addEventListener("click", function () {
+      buttonLike[i].classList.toggle('cards__like-button_active');
+    });
   };
 };
 
+const popupPhoto = document.querySelector('#popup-image');
+
+function showPhoto() {
+  let photoList = document.querySelectorAll('.cards__photo');
+  let namePhoto = document.querySelectorAll('.cards__name');
+
+  for (let i = 0; i < photoList.length; i++) {
+    photoList[i].addEventListener("click", function () {
+      let popupUrl = document.querySelector('.popup__image');
+      popupUrl.src = photoList[i].src;
+      let popupName = document.querySelector('.popup__name');
+      popupName.textContent = namePhoto[i].textContent;
+      popupPhoto.classList.add('popup_opened');
+      });
+    };
+  };
+
+function closePopup() {
+  popupEdit.classList.remove('popup_opened');
+  popupAddPlace.classList.remove('popup_opened');
+  popupPhoto.classList.remove('popup_opened');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  for (let i = 0; i < buttonExit.length; i++) {
+    buttonExit[i].addEventListener("click", closePopup);
+  }
+});
+
+showPhoto();
 deleteCard();
 pressLike();
