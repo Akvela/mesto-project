@@ -2,5 +2,6 @@
     background-color: transparent;
     box-shadow: none;
     max-width: 75vw;
+    width: auto;
     max-height: 75vh;
 }
