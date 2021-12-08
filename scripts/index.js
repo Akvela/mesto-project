@@ -54,6 +54,14 @@ buttonPlus.addEventListener('click', function () {
   popupAddPlace.classList.add('popup_opened');
 });
 
+const popupPhoto = document.querySelector('#popup-image');
+
+function closePopup() {
+  popupEdit.classList.remove('popup_opened');
+  popupAddPlace.classList.remove('popup_opened');
+  popupPhoto.classList.remove('popup_opened');
+}
+
 const formInfoElement = document.querySelector('[name="form-info"]');
 const nameInput = document.querySelector('[name="nickname"]');
 const jobInput = document.querySelector('[name="text"]');
@@ -82,22 +90,6 @@ function deleteCard() {
   };
 };
 
-
-function addNewCard (evt) {
-  evt.preventDefault();
-  cardElementCopy = cardElement.cloneNode(true);
-  cardElementCopy.querySelector('.cards__name').textContent = placeInput.value;
-  cardElementCopy.querySelector('.cards__photo').src = urlCardInput.value;
-  pressLike();
-  showPhoto();
-  deleteCard();
-  cardsContainer.prepend(cardElementCopy);
-  pressLike();
-  showPhoto();
-  deleteCard();
-  closePopup();
-}
-
 formCardElement.addEventListener('submit', addNewCard);
 
 function pressLike() {
@@ -108,8 +100,6 @@ function pressLike() {
     });
   };
 };
-
-const popupPhoto = document.querySelector('#popup-image');
 
 function showPhoto() {
   let photoList = document.querySelectorAll('.cards__photo');
@@ -126,10 +116,19 @@ function showPhoto() {
     };
   };
 
-function closePopup() {
-  popupEdit.classList.remove('popup_opened');
-  popupAddPlace.classList.remove('popup_opened');
-  popupPhoto.classList.remove('popup_opened');
+function addNewCard (evt) {
+  evt.preventDefault();
+  cardElementCopy = cardElement.cloneNode(true);
+  cardElementCopy.querySelector('.cards__name').textContent = placeInput.value;
+  cardElementCopy.querySelector('.cards__photo').src = urlCardInput.value;
+  pressLike();
+  showPhoto();
+  deleteCard();
+  cardsContainer.prepend(cardElementCopy);
+  pressLike();
+  showPhoto();
+  deleteCard();
+  closePopup();
 }
 
 document.addEventListener('DOMContentLoaded', function() {
