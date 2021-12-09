@@ -90,7 +90,7 @@ function editProfile(evt) {
   evt.preventDefault(); 
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  closePopup(formInfoElement.closest('.popup'));
+  closePopup(popupEdit);
 }
 
 formInfoElement.addEventListener('submit', editProfile);
@@ -104,22 +104,16 @@ formCardElement.addEventListener('submit', addNewCard);
 function addNewCard(evt) {
   evt.preventDefault();
   cardsContainer.prepend(createCard(placeInput.value, urlCardInput.value));
-  closePopup(formCardElement.closest('.popup'));
+  closePopup(popupAddPlace);
 }
 
-function showPhoto() {
-  const photosList = document.querySelectorAll('.cards__photo');
-  const namesPhoto = document.querySelectorAll('.cards__name');
-
-  for (let i = 0; i < photosList.length; i++) {
-    photosList[i].addEventListener("click", function () {
-      let popupUrl = document.querySelector('.popup__image');
-      popupUrl.src = photosList[i].src;
-      let popupName = document.querySelector('.popup__name');
-      popupName.textContent = namesPhoto[i].textContent;
-      openPopup(popupPhoto);
-    });
-  };
+function showPhoto(event) {
+  const popupUrl = document.querySelector('.popup__image');
+  popupUrl.src = event.target.src;
+  popupUrl.alt = event.target.alt;
+  const popupName = document.querySelector('.popup__name');
+  popupName.textContent = event.target.alt;
+  openPopup(popupPhoto);
 };
 
 const buttonsExit = document.querySelectorAll('.popup__exit-button');
