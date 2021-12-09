@@ -64,6 +64,8 @@ const popupEdit = document.querySelector('#edit-info');
 const buttonPlus = document.querySelector('.profile__add-button');
 const popupAddPlace = document.querySelector('#add-card');
 const popupPhoto = document.querySelector('#popup-image');
+const nameProfile = document.querySelector('.profile__nickname');
+const jobProfile = document.querySelector('.profile__text');
 
 function openPopup(popup) {
   popup.classList.add('popup_opened');
@@ -74,6 +76,8 @@ function closePopup(popup) {
 }
 
 buttonEdit.addEventListener('click', function() {
+  nameInput.value = nameProfile.textContent;
+  jobInput.value = jobProfile.textContent;
   openPopup(popupEdit);
 });
 buttonPlus.addEventListener('click', function() {
@@ -83,11 +87,9 @@ buttonPlus.addEventListener('click', function() {
 const formInfoElement = document.querySelector('[name="form-info"]');
 const nameInput = document.querySelector('[name="nickname"]');
 const jobInput = document.querySelector('[name="text"]');
-const nameProfile = document.querySelector('.profile__nickname');
-const jobProfile = document.querySelector('.profile__text');
 
 function editProfile(evt) {
-  evt.preventDefault(); 
+  evt.preventDefault();
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
   closePopup(popupEdit);
@@ -107,11 +109,12 @@ function addNewCard(evt) {
   closePopup(popupAddPlace);
 }
 
+const popupUrl = document.querySelector('.popup__image');
+const popupName = document.querySelector('.popup__name');
+
 function showPhoto(event) {
-  const popupUrl = document.querySelector('.popup__image');
   popupUrl.src = event.target.src;
   popupUrl.alt = event.target.alt;
-  const popupName = document.querySelector('.popup__name');
   popupName.textContent = event.target.alt;
   openPopup(popupPhoto);
 };
