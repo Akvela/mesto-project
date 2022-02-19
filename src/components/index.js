@@ -24,12 +24,4 @@ buttonPlus.addEventListener('click', function() {
   openPopup(popupAddPlace);
 });
 
-const buttonsExit = document.querySelectorAll('.popup__exit-button');
-
-buttonsExit.forEach(function(button) {
-  button.addEventListener("click", function() {
-    closePopup(button.closest('.popup'));
-  });
-});
-
 enableValidation(validationConfig);

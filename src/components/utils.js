@@ -1,13 +1,14 @@
 let activePopup = document.querySelector('.popup_opened');
+const buttonEscKeyCode = 27;
 
 function closePopup(popup) {
   document.removeEventListener('keydown', handleEscUp);
-  document.removeEventListener('click', handleClickOverlay);
+  popup.removeEventListener('click', handleClickOverlay);
   popup.classList.remove('popup_opened');
 };
 
 const handleEscUp = (evt) => {
-  if (evt.keyCode == 27) {
+  if (evt.keyCode == buttonEscKeyCode) {
     evt.preventDefault();
     closePopup(activePopup);
   };
@@ -24,7 +25,7 @@ const handleClickOverlay = (evt) => {
 function openPopup(popup) {
   popup.classList.add('popup_opened');
   document.addEventListener('keydown', handleEscUp);
-  document.addEventListener('click', handleClickOverlay);
+  popup.addEventListener('click', handleClickOverlay);
 };
 
 export { closePopup, openPopup };
