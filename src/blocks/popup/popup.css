@@ -11,4 +11,5 @@
   visibility: hidden;
   opacity: 0;
   transition: visibility .2s, opacity .2s ease-in-out;
+  cursor: pointer;
 }

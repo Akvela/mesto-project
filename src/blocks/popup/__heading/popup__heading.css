@@ -5,11 +5,10 @@
   font-weight: 900;
   margin: 0;
   padding-top: 34px;
-  padding-bottom: 24px;
+  padding-bottom: 45px;
   padding-left: 36px;
   display: block;
   max-width: 330px;
-  
 }
 
 @media screen and (max-width: 580px) {
@@ -17,7 +16,6 @@
     font-size: 18px;
     line-height: 22px;
     padding-top: 25px;
-    padding-bottom: 45px;
     padding-left: 22px;
     max-width: 238px;
   }

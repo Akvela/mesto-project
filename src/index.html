@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./pages/index.css">
+
     <title>Mesto</title>
 </head>
 <body class="body">
@@ -14,7 +14,7 @@
     <main class="content">
       <section class="profile">
         <div class="profile__item">
-          <img src="./images/image.png" alt="Аватар" class="profile__avatar">
+          <img src="<%=require('./images/image.png')%>" alt="Аватар" class="profile__avatar">
           <div class="profile__info">
             <h1 class="profile__nickname">Жак-Ив Кусто</h1>
             <button type="button" class="profile__edit-button" aria-label="Редактирование"></button>
@@ -31,32 +31,45 @@
       <div class="popup" id="edit-info">
         <div class="popup__container">
           <h2 class="popup__heading">Редактировать профиль</h2>
-          <form name="form-info">
+          <form name="form-info" id="form-info" class="popup__form" novalidate>
             <fieldset class="popup__input-container">
-              <input type="text" class="popup__item" name="nickname" placeholder="Жак-Ив Кусто" required>
-              <input type="text" class="popup__item" name="text" placeholder="Исследователь океана">
+              <label class="input-container">
+                <input type="text" class="popup__item" id="nickname" name="nickname" placeholder="Имя" value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+                <span id="error-nickname" class="popup__error-message"></span>
+              </label>
+              <label class="input-container">
+                <input type="text" class="popup__item" id="text" name="text" placeholder="О себе" value="Исследователь океана" minlength="2" maxlength="200" required>
+                <span id="error-text" class="popup__error-message"></span>
+              </label>
             </fieldset> 
             <button type="submit" class="popup__save-button">Сохранить</button>
           </form>
-          <button type="button" class="popup__exit-button" aria-label="Выйти"></button>  
+          <button type="button" class="popup__exit-button" aria-label="Выйти"></button>
         </div>
       </div>
       <div class="popup" id="add-card">
         <div class="popup__container">
           <h2 class="popup__heading">Новое место</h2>
-          <form name="form-place">
+          <form name="form-place" id="form-place" class="popup__form" novalidate>
             <fieldset class="popup__input-container">
-              <input type="text" class="popup__item popup__item_place" name="place" placeholder="Название" required>
-              <input type="text" class="popup__item popup__item_place" name="url-card" placeholder="Ссылка на картинку">
+              <label class="input-container">
+                <input type="text" class="popup__item" id="place" name="place" placeholder="Название" minlength="2" maxlength="30" required>
+                <span id="error-place" class="popup__error-message"></span>
+              </label>
+              <label class="input-container">
+                <input type="url" class="popup__item" id="url-card" name="url-card" placeholder="Ссылка на картинку" required>
+                <span id="error-url-card" class="popup__error-message"></span>
+              </label>
             </fieldset> 
-            <button type="submit" class="popup__save-button">Создать</button>
+            <button type="submit" class="popup__save-button" id="button-add-card">Создать</button>
           </form>
           <button type="button" class="popup__exit-button" aria-label="Выйти"></button>  
         </div>
       </div>
+
       <div class="popup popup_photo" id="popup-image">
         <div class="popup__container popup__container_image">
-          <img src="./images/komi.jpg" class="popup__image" alt="Коми">
+          <img src="<%=require('./images/komi.jpg')%>" class="popup__image" alt="Коми">
           <h2 class="popup__name">Коми</h2>
           <button type="button" class="popup__exit-button" aria-label="Выйти"></button>
         </div>
@@ -66,7 +79,7 @@
     <template id="card">
       <div class="cards__item">  
         <button type="button" class="cards__trash-button" aria-label="Удалить"></button>
-        <img src="./images/komi.jpg" class="cards__photo" alt="Коми">
+        <img src="<%=require('./images/komi.jpg')%>" class="cards__photo" alt="Коми">
         <div class="cards__info">
           <h2 class="cards__name">Коми</h2>
           <button type="button" class="cards__like-button" aria-label="Нравится"></button> 
@@ -78,6 +91,6 @@
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
   </div>
-  <script src="./scripts/index.js"></script>
+  
 </body>
 </html>
