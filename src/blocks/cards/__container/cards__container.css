@@ -1,0 +1,9 @@
+.cards__container {
+  display: flex;
+  flex-direction: column;
+  max-width: 22px;
+  min-height: 35px;
+  box-sizing: border-box;
+  margin-top: 22px;
+  margin-right: 20px;
+}

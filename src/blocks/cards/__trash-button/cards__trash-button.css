@@ -7,7 +7,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  display: block;
+  display: none;
   cursor: pointer;
   background-size: contain;
   border: 0;

@@ -1,4 +1,4 @@
-.popup__save-button_disabled {
+.popup__button_disabled {
   opacity: .2;
   background-color: transparent;
   border: 1px solid #000000;
@@ -6,6 +6,6 @@
   transition: none;
 }
 
-.popup__save-button:hover {
+.popup__button_disabled:hover {
   opacity: .2;
 }

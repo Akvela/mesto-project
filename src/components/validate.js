@@ -3,8 +3,8 @@ export const validationConfig = {
   inputSelector: '.popup__item',
   errorClass: 'popup__error-message_visible',
   inputInvalidClass: 'popup__item_invalid',
-  buttonSelector: '.popup__save-button',
-  buttonDisabledClass: 'popup__save-button_disabled'
+  buttonSelector: '.popup__button',
+  buttonDisabledClass: 'popup__button_disabled'
 };
 
 const hideInputError = (inputElement, errorElement, config) => {
