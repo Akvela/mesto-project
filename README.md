@@ -5,6 +5,7 @@
 * JavaScript
 * Babel
 * Модули
+* API
 * Валидация форм
 * Grid Layout
 * Flex
