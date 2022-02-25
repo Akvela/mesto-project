@@ -1,3 +1,4 @@
+let activePopup = document.querySelector('.popup_opened');
 const buttonEscKeyCode = 27;
 
 function closePopup(popup) {
@@ -7,7 +8,6 @@ function closePopup(popup) {
 };
 
 const handleEscUp = (evt) => {
-  let activePopup = document.querySelector('.popup_opened');
   if (evt.keyCode == buttonEscKeyCode) {
     evt.preventDefault();
     closePopup(activePopup);
