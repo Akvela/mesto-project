@@ -1,5 +1,6 @@
 import { showPhoto } from './modal.js';
-import { myOwnerId, deleteItem, addLikes, deleteLikes } from './api.js';
+import { deleteItem, addLikes, deleteLikes } from './api.js';
+import { userId } from './index.js';
 
 const cardsContainer = document.querySelector('.cards__gallery');
 const cardTemplate = document.querySelector('#card').content;
@@ -44,11 +45,11 @@ function createCard(name, link, id, ownerId, likes) {
   const cardName = cardElement.querySelector('.cards__name');
   const cardLikes = cardElement.querySelector('.cards__likes');
 
-  if (ownerId == myOwnerId) {
+  if (ownerId == userId) {
     buttonDelete.classList.add('cards__trash-button_visible');
   };
  
-  const activeLike = likes.some(item => { return item._id == myOwnerId; });
+  const activeLike = likes.some(item => { return item._id == userId; });
   if (activeLike) {
     buttonLike.classList.add('cards__like-button_active');
   };

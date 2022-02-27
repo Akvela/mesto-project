@@ -6,28 +6,22 @@ import { enableValidation, validationConfig } from './validate.js';
 import { getProfile, getItems } from './api.js';
 
 const avatarProfile = document.querySelector('.profile__avatar');
+export let userId;
 
-getItems()
-  .then(data => {
-    const newCards = data.map(function(item) {
-    return createCard(item.name, item.link, item._id, item.owner._id, item.likes);
-    });
+Promise.all([getProfile(), getItems()])
+  .then(([userData, cards]) => {
+    nameProfile.textContent = userData.name;
+    jobProfile.textContent = userData.about;
+    userId = userData._id
+    avatarProfile.src = userData.avatar;
+    const newCards = cards.map(function(item) {
+      return createCard(item.name, item.link, item._id, item.owner._id, item.likes);
+      });
     cardsContainer.prepend(...newCards);
   })
   .catch(err => {
-    console.log('Ошибка при загрузке карточек');
+    console.log('Ошибка при загрузке данных с сервера');
   });
-
-getProfile()
-  .then(data => {
-    nameProfile.textContent = data.name;
-    jobProfile.textContent = data.about;
-    avatarProfile.src = data.avatar;
-  })
-  .catch(err => {
-    console.log('Ошибка при загрузке информации профиля');
-  });
-
 
 formInfoElement.addEventListener('submit', editProfile);
 

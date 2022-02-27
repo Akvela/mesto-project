@@ -1,4 +1,3 @@
-let activePopup = document.querySelector('.popup_opened');
 const buttonEscKeyCode = 27;
 
 function closePopup(popup) {
@@ -10,14 +9,14 @@ function closePopup(popup) {
 const handleEscUp = (evt) => {
   if (evt.keyCode == buttonEscKeyCode) {
     evt.preventDefault();
+    const activePopup = document.querySelector('.popup_opened');
     closePopup(activePopup);
   };
 };
 
 const handleClickOverlay = (evt) => {
-  activePopup = document.querySelector('.popup_opened');
   if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__exit-button')) {
-    closePopup(activePopup);
+    closePopup(evt.currentTarget);
   };
 };
 

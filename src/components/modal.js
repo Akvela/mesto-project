@@ -42,7 +42,8 @@ export function editProfile(evt) {
   changeProfile(nameProfileId, jobProfileId)
     .then(res => {
       nameProfile.textContent = res.name;
-      jobProfile.textContent = res.about;  
+      jobProfile.textContent = res.about;
+      closePopup(popupEdit);
     })
     .catch(err => {
         console.log('Ошибка при редактировании профиля');
@@ -50,7 +51,6 @@ export function editProfile(evt) {
     .finally(() => {
       deleteLoading(buttonEditProfile);
     }); 
-  closePopup(popupEdit);
 };
 
 const popupUrl = document.querySelector('.popup__image');
@@ -74,6 +74,10 @@ export function addNewCard(evt) {
   createItem(nameItem, linkItem)
     .then(res => {
       cardsContainer.prepend(createCard(res.name, res.link, res._id, res.owner._id, res.likes));
+      closePopup(popupAddPlace);
+      placeInput.value = '';
+      urlCardInput.value = '';
+      disableButton(buttonAddCard, validationConfig);
     })
     .catch(err => {
       console.log('Ошибка при отправке карточки');
@@ -81,10 +85,6 @@ export function addNewCard(evt) {
     .finally(() => {
       deleteLoading(buttonAddCard);
     });
-  closePopup(popupAddPlace);
-  placeInput.value = '';
-  urlCardInput.value = '';
-  disableButton(buttonAddCard, validationConfig);
 };
 
 const avatarInput = document.querySelector('[name="url-avatar"]');
@@ -96,6 +96,9 @@ export function editAvatar(evt) {
   changeAvatar(avatarUrl)
     .then(res => {
       avatar.src = res.avatar;
+      closePopup(popupEditAvatar);
+      avatarInput.value = '';
+      disableButton(buttonSaveAvatar, validationConfig);
     })
     .catch(err => {
       console.log('Ошибка при обновлении аватара');
@@ -103,7 +106,4 @@ export function editAvatar(evt) {
     .finally(() => {
       deleteLoading(buttonSaveAvatar);
     });
-  closePopup(popupEditAvatar);
-  avatarInput.value = '';
-  disableButton(buttonSaveAvatar, validationConfig);
 };

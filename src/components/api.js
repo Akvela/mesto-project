@@ -14,17 +14,11 @@ const parseResponce = (res) => {
   return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
 };
 
-export const myOwnerId = '92c7559217e401afd660f3b2';
-
 export const getProfile = () => {
   return fetch(`${config.url}/users/me`, {
     headers: config.headers,
   })
     .then(res => parseResponce(res))
-    .catch(err => {
-        console.log(err);
-        return Promise.reject(err);
-    });
 };
 
 export const changeProfile = (name, about) => {
@@ -38,10 +32,6 @@ export const changeProfile = (name, about) => {
     body: JSON.stringify(info)
   })
     .then(res => parseResponce(res))
-    .catch(err => {
-        console.log(err);
-        return Promise.reject(err);
-    })
 };
 
 export const getItems = () => {
@@ -49,10 +39,6 @@ export const getItems = () => {
     headers: config.headers,  
   })
     .then(res => parseResponce(res))
-    .catch(err => {
-      console.log(err);
-      return Promise.reject(err);
-    })
 };
 
 export const createItem = (item, link) => {
@@ -66,10 +52,6 @@ export const createItem = (item, link) => {
     body: JSON.stringify(data)
   })
     .then(res => parseResponce(res))
-    .catch(err => {
-      console.log(err);
-      return Promise.reject(err);
-    })
 };
 
 export const deleteItem = (id) => {
@@ -78,10 +60,6 @@ export const deleteItem = (id) => {
     headers: config.headers,
   })
     .then((res) => parseResponce(res))
-    .catch((err) => {
-      console.log(err);
-      return Promise.reject(err);
-    });
 };
 
 export const addLikes = (id) => {
@@ -90,10 +68,6 @@ export const addLikes = (id) => {
     headers: config.headers,
   })
     .then(res => parseResponce(res))
-    .catch(err => {
-      console.log(err);
-      return Promise.reject(err);
-    });
 };
 
 export const deleteLikes = (id) => {
@@ -102,24 +76,16 @@ export const deleteLikes = (id) => {
     headers: config.headers,
   })
     .then(res => parseResponce(res))
-    .catch(err => {
-      console.log(err);
-      return Promise.reject(err);
-    });
 };
 
 export const changeAvatar = (item) => {
   const picture = {
     avatar: item
   };
-    return fetch(`${config.url}/users/me/avatar`, {
-      method: 'PATCH',
-      headers: config.headers,
-      body: JSON.stringify(picture)
-    })
-      .then(res => parseResponce(res))
-      .catch(err => {
-          console.log(err);
-          return Promise.reject(err);
-      })
-  };
+  return fetch(`${config.url}/users/me/avatar`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify(picture)
+  })
+    .then(res => parseResponce(res))
+};
