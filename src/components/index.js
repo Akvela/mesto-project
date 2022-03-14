@@ -3,12 +3,21 @@ import { createCard, cardsContainer } from './card.js';
 import { editProfile, addNewCard, popupEditAvatar, buttonEditAvatar, formAvatarElement, editAvatar, formCardElement, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
 import { openPopup } from './utils.js';
 import { enableValidation, validationConfig } from './validate.js';
-import { getProfile, getItems } from './api.js';
+import { getProfile, getItems, Api } from './api.js';
 
 const avatarProfile = document.querySelector('.profile__avatar');
 export let userId;
 
-Promise.all([getProfile(), getItems()])
+const classApi = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
+  headers: {
+    authorization: '8ced4900-b351-425e-b929-76d82504c0ac',
+    'Content-Type': 'application/json'
+  }
+})
+
+
+Promise.all([classApi.getProfile(), getItems()])
   .then(([userData, cards]) => {
     nameProfile.textContent = userData.name;
     jobProfile.textContent = userData.about;
