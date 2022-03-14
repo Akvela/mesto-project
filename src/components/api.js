@@ -6,19 +6,37 @@ const config = {
   }
 };
 
+export class Api {
+  constructor(options) {
+    this._url = options.baseUrl,
+    this._headers = options.headers
+  }
+  _responseHeandler(res) {
+    if (res.ok) {
+      return res.json();
+    } else {
+      return Promise.reject(err);
+    }
+  }
+
+  getProfile() {
+    return fetch(`${this._url}/users/me`, {
+      headers: this._headers,
+    })
+      .then(res => this._responseHeandler(res))
+  }
+
+
+}
+
+
+
 const parseResponce = (res) => {
   if (res.ok) {
     return res.json();
   }
 
   return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
-};
-
-export const getProfile = () => {
-  return fetch(`${config.url}/users/me`, {
-    headers: config.headers,
-  })
-    .then(res => parseResponce(res))
 };
 
 export const changeProfile = (name, about) => {
