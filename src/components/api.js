@@ -11,7 +11,7 @@ export class Api {
     this._url = options.baseUrl,
     this._headers = options.headers
   }
-  _responseHeandler(res) {
+  _responseHandler(res) {
     if (res.ok) {
       return res.json();
     } else {
@@ -23,7 +23,7 @@ export class Api {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
     })
-      .then(res => this._responseHeandler(res));
+      .then(res => this._responseHandler(res));
   }
 
   changeProfile = (name, about) => {
@@ -36,7 +36,14 @@ export class Api {
       headers: this._headers,
       body: JSON.stringify(info)
     })
-      .then(res => this._responseHeandler(res));
+      .then(res => this._responseHandler(res));
+  }
+
+  getItems() {
+    return fetch(`${this._url}/cards`, {
+      headers: this._headers,
+    })
+      .then(res => this._responseHandler(res));
   }
 }
 
@@ -48,13 +55,6 @@ const parseResponce = (res) => {
   }
 
   return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
-};
-
-export const getItems = () => {
-  return fetch(`${config.url}/cards`, {
-    headers: config.headers,  
-  })
-    .then(res => parseResponce(res))
 };
 
 export const createItem = (item, link) => {
