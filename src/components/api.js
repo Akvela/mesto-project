@@ -26,7 +26,7 @@ export class Api {
       .then(res => this._responseHandler(res));
   }
 
-  changeProfile = (name, about) => {
+  changeProfile(name, about) {
     const info = {
       name: name,
       about: about
@@ -46,7 +46,7 @@ export class Api {
       .then(res => this._responseHandler(res));
   }
 
-  createItem = (item, link) => {
+  createItem(item, link) {
     const data = {
       name: item,
       link: link
@@ -57,6 +57,14 @@ export class Api {
       body: JSON.stringify(data)
     })
       .then(res => this._responseHandler(res));
+  }
+
+  deleteItem(id) {
+    return fetch(`${this._url}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this._headers
+    })
+      .then((res) => this._responseHandler(res));
   }
 }
 
@@ -70,26 +78,7 @@ const parseResponce = (res) => {
   return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
 };
 
-export const createItem = (item, link) => {
-  const data = {
-    name: item,
-    link: link
-  };
-  return fetch(`${config.url}/cards`, {
-    method: 'POST',
-    headers: config.headers,
-    body: JSON.stringify(data)
-  })
-    .then(res => parseResponce(res))
-};
 
-export const deleteItem = (id) => {
-  return fetch(`${config.url}/cards/${id}`, {
-    method: 'DELETE',
-    headers: config.headers,
-  })
-    .then((res) => parseResponce(res))
-};
 
 export const addLikes = (id) => {
   return fetch(`${config.url}/cards/likes/${id}`, {

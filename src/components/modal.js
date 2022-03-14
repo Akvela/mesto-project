@@ -1,7 +1,7 @@
 import { openPopup, closePopup } from './utils.js';
 import { cardsContainer, createCard } from './card.js';
 import { disableButton, validationConfig } from './validate.js';
-import { changeProfile, createItem, changeAvatar, Api } from './api.js';
+import { changeAvatar, Api } from './api.js';
 
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const popupEdit = document.querySelector('#edit-info');
