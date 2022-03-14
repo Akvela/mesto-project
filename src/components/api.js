@@ -23,10 +23,21 @@ export class Api {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
     })
-      .then(res => this._responseHeandler(res))
+      .then(res => this._responseHeandler(res));
   }
 
-
+  changeProfile = (name, about) => {
+    const info = {
+      name: name,
+      about: about
+    };
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(info)
+    })
+      .then(res => this._responseHeandler(res));
+  }
 }
 
 
@@ -37,19 +48,6 @@ const parseResponce = (res) => {
   }
 
   return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
-};
-
-export const changeProfile = (name, about) => {
-  const info = {
-    name: name,
-    about: about
-  };
-  return fetch(`${config.url}/users/me`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify(info)
-  })
-    .then(res => parseResponce(res))
 };
 
 export const getItems = () => {

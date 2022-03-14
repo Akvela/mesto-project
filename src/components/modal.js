@@ -1,7 +1,7 @@
 import { openPopup, closePopup } from './utils.js';
 import { cardsContainer, createCard } from './card.js';
 import { disableButton, validationConfig } from './validate.js';
-import { changeProfile, createItem, changeAvatar } from './api.js';
+import { changeProfile, createItem, changeAvatar, Api } from './api.js';
 
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const popupEdit = document.querySelector('#edit-info');
@@ -22,6 +22,14 @@ export const jobInput = document.querySelector('[name="text"]');
 const buttonAddCard = document.querySelector('.popup__button_type_create');
 const buttonEditProfile = document.querySelector('.popup__button_type_save');
 
+const classApi = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
+  headers: {
+    authorization: '8ced4900-b351-425e-b929-76d82504c0ac',
+    'Content-Type': 'application/json'
+  }
+});
+
 function addLoading(button) {
   button.textContent = 'Сохранение...';
 };
@@ -39,7 +47,7 @@ export function editProfile(evt) {
   const nameProfileId = nameInput.value;
   const jobProfileId = jobInput.value;
   addLoading(buttonEditProfile);
-  changeProfile(nameProfileId, jobProfileId)
+  classApi.changeProfile(nameProfileId, jobProfileId)
     .then(res => {
       nameProfile.textContent = res.name;
       jobProfile.textContent = res.about;
