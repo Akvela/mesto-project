@@ -79,7 +79,7 @@ export function addNewCard(evt) {
   const nameItem = placeInput.value;
   const linkItem = urlCardInput.value;
   addLoading(buttonAddCard);
-  createItem(nameItem, linkItem)
+  classApi.createItem(nameItem, linkItem)
     .then(res => {
       cardsContainer.prepend(createCard(res.name, res.link, res._id, res.owner._id, res.likes));
       closePopup(popupAddPlace);

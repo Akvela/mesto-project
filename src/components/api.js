@@ -45,6 +45,19 @@ export class Api {
     })
       .then(res => this._responseHandler(res));
   }
+
+  createItem = (item, link) => {
+    const data = {
+      name: item,
+      link: link
+    };
+    return fetch(`${this._url}/cards`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data)
+    })
+      .then(res => this._responseHandler(res));
+  }
 }
 
 
