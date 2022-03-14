@@ -1,7 +1,7 @@
 import { openPopup, closePopup } from './utils.js';
 import { cardsContainer, createCard } from './card.js';
 import { disableButton, validationConfig } from './validate.js';
-import { changeAvatar, Api } from './api.js';
+import { Api } from './api.js';
 
 export const buttonEdit = document.querySelector('.profile__edit-button');
 export const popupEdit = document.querySelector('#edit-info');
@@ -101,7 +101,7 @@ export function editAvatar(evt) {
   evt.preventDefault();
   const avatarUrl = avatarInput.value;
   addLoading(buttonSaveAvatar);
-  changeAvatar(avatarUrl)
+  classApi.changeAvatar(avatarUrl)
     .then(res => {
       avatar.src = res.avatar;
       closePopup(popupEditAvatar);
