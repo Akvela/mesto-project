@@ -3,7 +3,7 @@ import { createCard, cardsContainer } from './card.js';
 import { editProfile, addNewCard, popupEditAvatar, buttonEditAvatar, formAvatarElement, editAvatar, formCardElement, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
 import { openPopup } from './utils.js';
 import { enableValidation, validationConfig } from './validate.js';
-import { getProfile, getItems, Api } from './api.js';
+import { Api } from './api.js';
 
 const avatarProfile = document.querySelector('.profile__avatar');
 export let userId;
@@ -17,7 +17,7 @@ const classApi = new Api({
 })
 
 
-Promise.all([classApi.getProfile(), getItems()])
+Promise.all([classApi.getProfile(), classApi.getItems()])
   .then(([userData, cards]) => {
     nameProfile.textContent = userData.name;
     jobProfile.textContent = userData.about;
@@ -29,7 +29,7 @@ Promise.all([classApi.getProfile(), getItems()])
     cardsContainer.prepend(...newCards);
   })
   .catch(err => {
-    console.log('Ошибка при загрузке данных с сервера');
+    console.log(`Ошибка: ${err.message}`);
   });
 
 formInfoElement.addEventListener('submit', editProfile);
