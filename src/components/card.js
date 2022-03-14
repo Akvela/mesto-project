@@ -1,9 +1,17 @@
 import { showPhoto } from './modal.js';
-import { deleteItem, addLikes, deleteLikes } from './api.js';
+import { deleteItem, addLikes, deleteLikes, Api } from './api.js';
 import { userId } from './index.js';
 
 const cardsContainer = document.querySelector('.cards__gallery');
 const cardTemplate = document.querySelector('#card').content;
+
+const classApi = new Api({
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
+  headers: {
+    authorization: '8ced4900-b351-425e-b929-76d82504c0ac',
+    'Content-Type': 'application/json'
+  }
+});
 
 function pressLike(event) {
   if (event.target.classList.contains('cards__like-button_active')) {
@@ -28,7 +36,7 @@ function pressLike(event) {
 };
 
 function deleteCard(event) {
-  deleteItem(event.target.closest('.cards__item').dataset.id)
+  classApi.deleteItem(event.target.closest('.cards__item').dataset.id)
     .then(() => {
       event.target.closest('.cards__item').remove();
     })
