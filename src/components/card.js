@@ -1,5 +1,5 @@
 import { showPhoto } from './modal.js';
-import { deleteItem, addLikes, deleteLikes, Api } from './api.js';
+import { deleteLikes, Api } from './api.js';
 import { userId } from './index.js';
 
 const cardsContainer = document.querySelector('.cards__gallery');
@@ -24,7 +24,7 @@ function pressLike(event) {
         console.log('Ошибка при снятии лайка');
       });
   } else {
-    addLikes(event.target.closest('.cards__item').dataset.id)
+    classApi.addLikes(event.target.closest('.cards__item').dataset.id)
       .then((res) => {
         event.target.classList.add('cards__like-button_active');
         event.target.closest('.cards__item').querySelector('.cards__likes').textContent = res.likes.length;

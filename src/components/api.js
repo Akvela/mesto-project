@@ -66,6 +66,14 @@ export class Api {
     })
       .then((res) => this._responseHandler(res));
   }
+
+  addLikes(id) {
+    return fetch(`${this._url}/cards/likes/${id}`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+      .then(res => this._responseHandler(res));
+  }
 }
 
 
