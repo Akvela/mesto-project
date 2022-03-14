@@ -1,5 +1,5 @@
 import { showPhoto } from './modal.js';
-import { deleteLikes, Api } from './api.js';
+import { Api } from './api.js';
 import { userId } from './index.js';
 
 const cardsContainer = document.querySelector('.cards__gallery');
@@ -15,7 +15,7 @@ const classApi = new Api({
 
 function pressLike(event) {
   if (event.target.classList.contains('cards__like-button_active')) {
-    deleteLikes(event.target.closest('.cards__item').dataset.id)
+    classApi.deleteLikes(event.target.closest('.cards__item').dataset.id)
       .then((res) => {
         event.target.classList.remove('cards__like-button_active');
         event.target.closest('.cards__item').querySelector('.cards__likes').textContent = res.likes.length;
