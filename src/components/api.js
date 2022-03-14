@@ -1,11 +1,3 @@
-const config = {
-  url: 'https://nomoreparties.co/v1/plus-cohort7',
-  headers: {
-    authorization: '8ced4900-b351-425e-b929-76d82504c0ac',
-    'Content-Type': 'application/json'
-  }
-};
-
 export class Api {
   constructor(options) {
     this._url = options.baseUrl,
@@ -82,26 +74,16 @@ export class Api {
     })
       .then(res => this._responseHandler(res));
   }
-}
 
-
-
-const parseResponce = (res) => {
-  if (res.ok) {
-    return res.json();
+  changeAvatar(item) {
+    const picture = {
+      avatar: item
+    };
+    return fetch(`${this._url}/users/me/avatar`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(picture)
+    })
+      .then(res => this._responseHandler(res));
   }
-
-  return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
-};
-
-export const changeAvatar = (item) => {
-  const picture = {
-    avatar: item
-  };
-  return fetch(`${config.url}/users/me/avatar`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify(picture)
-  })
-    .then(res => parseResponce(res))
-};
+}
