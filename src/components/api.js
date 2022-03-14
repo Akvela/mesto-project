@@ -74,6 +74,14 @@ export class Api {
     })
       .then(res => this._responseHandler(res));
   }
+
+  deleteLikes(id) {
+    return fetch(`${this._url}/cards/likes/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then(res => this._responseHandler(res));
+  }
 }
 
 
@@ -84,24 +92,6 @@ const parseResponce = (res) => {
   }
 
   return Promise.reject(new Error(`Произошла ошибка со статус-кодом ${res.status}`));
-};
-
-
-
-export const addLikes = (id) => {
-  return fetch(`${config.url}/cards/likes/${id}`, {
-    method: 'PUT',
-    headers: config.headers,
-  })
-    .then(res => parseResponce(res))
-};
-
-export const deleteLikes = (id) => {
-  return fetch(`${config.url}/cards/likes/${id}`, {
-    method: 'DELETE',
-    headers: config.headers,
-  })
-    .then(res => parseResponce(res))
 };
 
 export const changeAvatar = (item) => {
