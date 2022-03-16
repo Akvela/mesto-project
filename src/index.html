@@ -93,9 +93,22 @@
       </div>
     </main>
 
-    <template id="card">
+    <template id="self-card">
       <div class="cards__item">  
         <button type="button" class="cards__trash-button" aria-label="Удалить"></button>
+        <img src="" class="cards__photo" alt="">
+        <div class="cards__info">
+          <h2 class="cards__name"></h2>
+          <div class="cards__container">
+            <button type="button" class="cards__like-button" aria-label="Нравится"></button>
+            <div class="cards__likes">0</div>
+          </div>
+        </div>
+      </div>
+    </template>
+
+    <template id="card">
+      <div class="cards__item">  
         <img src="" class="cards__photo" alt="">
         <div class="cards__info">
           <h2 class="cards__name"></h2>

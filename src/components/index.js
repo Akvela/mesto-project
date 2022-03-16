@@ -4,6 +4,7 @@ import { editProfile, addNewCard, popupEditAvatar, buttonEditAvatar, formAvatarE
 import { openPopup } from './utils.js';
 import { enableValidation, validationConfig } from './validate.js';
 import { Api } from './api.js';
+import Card from './Card1';
 
 const avatarProfile = document.querySelector('.profile__avatar');
 export let userId;
@@ -23,10 +24,13 @@ Promise.all([classApi.getProfile(), classApi.getItems()])
     jobProfile.textContent = userData.about;
     userId = userData._id
     avatarProfile.src = userData.avatar;
-    const newCards = cards.map(function(item) {
-      return createCard(item.name, item.link, item._id, item.owner._id, item.likes);
+    cards.forEach(item => {
+      const card = userId === item.owner._id
+        ? new Card(item, '#self-card')
+        : new Card(item, '#card');
+      
+        cardsContainer.prepend(card.generate());
       });
-    cardsContainer.prepend(...newCards);
   })
   .catch(err => {
     console.log(`Ошибка: ${err.message}`);
