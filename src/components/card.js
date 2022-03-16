@@ -5,7 +5,7 @@ import { userId } from './index.js';
 const cardsContainer = document.querySelector('.cards__gallery');
 const cardTemplate = document.querySelector('#card').content;
 
-const classApi = new Api({
+export const classApi = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
   headers: {
     authorization: '8ced4900-b351-425e-b929-76d82504c0ac',
@@ -13,7 +13,7 @@ const classApi = new Api({
   }
 });
 
-function pressLike(event) {
+export function pressLike(event) {
   if (event.target.classList.contains('cards__like-button_active')) {
     classApi.deleteLikes(event.target.closest('.cards__item').dataset.id)
       .then((res) => {
