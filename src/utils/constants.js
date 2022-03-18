@@ -8,3 +8,5 @@ export const validationConfig = {
 };
 
 export const buttonEscKeyCode = 27;
+
+export const popupPhoto = document.querySelector('#popup-image');
