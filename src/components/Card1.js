@@ -1,5 +1,7 @@
 import { Api } from './api.js';
 import { userId } from './index.js';
+import PopupWithImage from './PopupWithImage.js';
+
 
 const classApi = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
@@ -29,21 +31,27 @@ export default class Card {
   _setLike() {
     const activeLike = this._likes.some(item => { return item._id === userId; });
     if (activeLike) {
-      this._element.querySelector('.cards__like-button').classList.add('cards__like-button_active');
+        this._likeButton.classList.add('cards__like-button_active');
     };
   }
 
   _setEventListeners() {
-     this._element.querySelector('.cards__like-button').addEventListener('click', () => {
-        this._handleClickLike();
-     });
+    this._likeButton.addEventListener('click', () => {
+      this._handleClickLike();
+    });
+
+    this._element.querySelector('.cards__photo').addEventListener('click', (evt) => {
+      const popupImage = new PopupWithImage({ link: this._link, name: this._name }, '#popup-image');
+      popupImage.open(evt);
+    })
    }
 
    _handleClickLike() {
-      if (this._element.querySelector('.cards__like-button').classList.contains('cards__like-button_active')) {
+      
+      if (this._likeButton.classList.contains('cards__like-button_active')) {
         classApi.deleteLikes(this._element.id)
           .then((res) => {
-            this._element.querySelector('.cards__like-button').classList.remove('cards__like-button_active');
+            this._likeButton.classList.remove('cards__like-button_active');
             this._element.querySelector('.cards__likes').textContent = res.likes.length;
           })
           .catch(err => {
@@ -52,7 +60,7 @@ export default class Card {
       } else {
         classApi.addLikes(this._element.id)
           .then((res) => {
-            this._element.querySelector('.cards__like-button').classList.add('cards__like-button_active');
+            this._likeButton.classList.add('cards__like-button_active');
             this._element.querySelector('.cards__likes').textContent = res.likes.length;
           })
           .catch(err => {
@@ -68,6 +76,7 @@ export default class Card {
     this._element.querySelector('.cards__name').textContent = this._name;
     this._element.id = this._id;
     this._element.querySelector('.cards__likes').textContent = this._likes.length;
+    this._likeButton = this._element.querySelector('.cards__like-button');
     this._setLike();
     this._setEventListeners();
 
