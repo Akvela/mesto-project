@@ -6,3 +6,5 @@ export const validationConfig = {
   buttonSelector: '.popup__button',
   buttonDisabledClass: 'popup__button_disabled'
 };
+
+export const buttonEscKeyCode = 27;
