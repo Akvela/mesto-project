@@ -27,13 +27,13 @@ export default class Card {
   }
 
   _setLike() {
-    const activeLike = this._likes.some(item => { return item._id == userId; });
+    const activeLike = this._likes.some(item => { return item._id === userId; });
     if (activeLike) {
       this._element.querySelector('.cards__like-button').classList.add('cards__like-button_active');
     };
   }
 
-   _setEventListeners() {
+  _setEventListeners() {
      this._element.querySelector('.cards__like-button').addEventListener('click', () => {
         this._handleClickLike();
      });
@@ -43,7 +43,6 @@ export default class Card {
       if (this._element.querySelector('.cards__like-button').classList.contains('cards__like-button_active')) {
         classApi.deleteLikes(this._element.id)
           .then((res) => {
-            console.log('here delete');
             this._element.querySelector('.cards__like-button').classList.remove('cards__like-button_active');
             this._element.querySelector('.cards__likes').textContent = res.likes.length;
           })
@@ -53,7 +52,6 @@ export default class Card {
       } else {
         classApi.addLikes(this._element.id)
           .then((res) => {
-            console.log('here add');
             this._element.querySelector('.cards__like-button').classList.add('cards__like-button_active');
             this._element.querySelector('.cards__likes').textContent = res.likes.length;
           })
