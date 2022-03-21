@@ -8,3 +8,6 @@ export const validationConfig = {
 };
 
 export const buttonEscKeyCode = 27;
+
+export const cardPhotoSelector = '.cards__photo';
+export const popupWithPhotoSelector = '#popup-image';

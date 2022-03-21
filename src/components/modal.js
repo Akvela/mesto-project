@@ -22,7 +22,7 @@ export const jobInput = document.querySelector('[name="text"]');
 const buttonAddCard = document.querySelector('.popup__button_type_create');
 const buttonEditProfile = document.querySelector('.popup__button_type_save');
 
-const classApi = new Api({
+const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
   headers: {
     authorization: '8ced4900-b351-425e-b929-76d82504c0ac',
@@ -47,7 +47,7 @@ export function editProfile(evt) {
   const nameProfileId = nameInput.value;
   const jobProfileId = jobInput.value;
   addLoading(buttonEditProfile);
-  classApi.changeProfile(nameProfileId, jobProfileId)
+  api.changeProfile(nameProfileId, jobProfileId)
     .then(res => {
       nameProfile.textContent = res.name;
       jobProfile.textContent = res.about;
@@ -79,7 +79,7 @@ export function addNewCard(evt) {
   const nameItem = placeInput.value;
   const linkItem = urlCardInput.value;
   addLoading(buttonAddCard);
-  classApi.createItem(nameItem, linkItem)
+  api.createItem(nameItem, linkItem)
     .then(res => {
       cardsContainer.prepend(createCard(res.name, res.link, res._id, res.owner._id, res.likes));
       closePopup(popupAddPlace);
@@ -101,7 +101,7 @@ export function editAvatar(evt) {
   evt.preventDefault();
   const avatarUrl = avatarInput.value;
   addLoading(buttonSaveAvatar);
-  classApi.changeAvatar(avatarUrl)
+  api.changeAvatar(avatarUrl)
     .then(res => {
       avatar.src = res.avatar;
       closePopup(popupEditAvatar);
