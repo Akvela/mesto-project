@@ -9,7 +9,7 @@ import Card from './Card1';
 const avatarProfile = document.querySelector('.profile__avatar');
 export let userId;
 
-const classApi = new Api({
+export const classApi = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
   headers: {
     authorization: '8ced4900-b351-425e-b929-76d82504c0ac',

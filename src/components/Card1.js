@@ -31,7 +31,7 @@ export default class Card {
   _setLike() {
     const activeLike = this._likes.some(item => { return item._id === userId; });
     if (activeLike) {
-        this._likeButton.classList.add('cards__like-button_active');
+      this._likeButton.classList.add('cards__like-button_active');
     };
   }
 
@@ -44,30 +44,29 @@ export default class Card {
       const popupImage = new PopupWithImage({ link: this._link, name: this._name }, '#popup-image');
       popupImage.open(evt);
     })
-   }
+  }
 
-   _handleClickLike() {
-      
-      if (this._likeButton.classList.contains('cards__like-button_active')) {
-        classApi.deleteLikes(this._element.id)
-          .then((res) => {
-            this._likeButton.classList.remove('cards__like-button_active');
-            this._element.querySelector('.cards__likes').textContent = res.likes.length;
-          })
-          .catch(err => {
-            console.log('Ошибка при снятии лайка');
-          });
-      } else {
-        classApi.addLikes(this._element.id)
-          .then((res) => {
-            this._likeButton.classList.add('cards__like-button_active');
-            this._element.querySelector('.cards__likes').textContent = res.likes.length;
-          })
-          .catch(err => {
-            console.log('Ошибка при постановке лайка');
-          });
-      }
-   }
+  _handleClickLike() {
+    if (this._likeButton.classList.contains('cards__like-button_active')) {
+      classApi.deleteLikes(this._element.id)
+        .then((res) => {
+          this._likeButton.classList.remove('cards__like-button_active');
+          this._element.querySelector('.cards__likes').textContent = res.likes.length;
+        })
+        .catch(err => {
+          console.log('Ошибка при снятии лайка');
+        });
+    } else {
+      classApi.addLikes(this._element.id)
+        .then((res) => {
+          this._likeButton.classList.add('cards__like-button_active');
+          this._element.querySelector('.cards__likes').textContent = res.likes.length;
+        })
+        .catch(err => {
+          console.log('Ошибка при постановке лайка');
+        });
+    }
+  }
 
   generate() {
     this._element = this._getElement();
