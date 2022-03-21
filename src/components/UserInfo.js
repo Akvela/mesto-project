@@ -1,5 +1,3 @@
-import { classApi } from './index.js';
-
 export default class UserInfo {
   constructor({selectorName, selectorAbout}, getProfile, setProfile) {
     this._name = document.querySelector(selectorName);
