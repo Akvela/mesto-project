@@ -30,7 +30,6 @@ Promise.all([api.getProfile(), api.getItems()])
       const popupWithImage = new PopupWithImage({link: item.link, name: item.name}, popupWithPhotoSelector);
 
       const cardSelector = userId === item.owner._id ? '#self-card' : '#card';
-      console.log(cardSelector);
       const card = new Card({
           _id: item._id,
           link: item.link,
@@ -59,9 +58,14 @@ Promise.all([api.getProfile(), api.getItems()])
                 });
             }
           },
+          deleteCardHandler: (evt) => {
+            const deleteButton = evt.target;
+            const cardItem = deleteButton.closest('.photo');
+            // Добавить открытие модального окна
+          }
         }, cardSelector);
       
-        cardsContainer.prepend(card.generate());
+        cardsContainer.prepend(card.generate(userId));
       });
   })
   .catch(err => {
