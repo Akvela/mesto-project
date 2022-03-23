@@ -1,5 +1,5 @@
 import { showPhoto } from './modal.js';
-import { Api } from './api.js';
+import { Api } from './Api.js';
 import { userId } from './index.js';
 
 const cardsContainer = document.querySelector('.cards__gallery');

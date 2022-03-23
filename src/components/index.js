@@ -1,12 +1,16 @@
 import '../pages/index.css';
-import { createCard, cardsContainer } from './card.js';
 import { editProfile, addNewCard, popupEditAvatar, buttonEditAvatar, formAvatarElement, editAvatar, formCardElement, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
 import { openPopup } from './utils.js';
 import { enableValidation, validationConfig } from './validate.js';
-import { Api } from './api.js';
+import { Api } from './Api.js';
 import Card from './Card1.js';
+import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
-import { popupWithPhotoSelector } from '../utils/constants.js';
+import { 
+  popupWithPhotoSelector,
+  cardsSelector,
+  cardLikeButtonActiveSelector
+} from '../utils/constants.js';
 
 const avatarProfile = document.querySelector('.profile__avatar');
 export let userId;
@@ -19,6 +23,7 @@ export const api = new Api({
   }
 });
 
+const popupWithImage = new PopupWithImage(popupWithPhotoSelector);
 
 Promise.all([api.getProfile(), api.getItems()])
   .then(([userData, cards]) => {
@@ -26,22 +31,22 @@ Promise.all([api.getProfile(), api.getItems()])
     jobProfile.textContent = userData.about;
     userId = userData._id
     avatarProfile.src = userData.avatar;
-    cards.forEach(item => {
-      const popupWithImage = new PopupWithImage({link: item.link, name: item.name}, popupWithPhotoSelector);
-
-      const cardSelector = userId === item.owner._id ? '#self-card' : '#card';
-      const card = new Card({
+    const cardList = new Section({
+      items: cards,
+      renderer: (item) => {
+        const cardSelector = userId === item.owner._id ? '#self-card' : '#card';
+        const card = new Card({
           _id: item._id,
           link: item.link,
           name: item.name,
           likes: item.likes,
-          openPopupHandler: () => popupWithImage.open(),
+          openPopupHandler: () => popupWithImage.open(item.link, item.name),
           handlerToggleLike: (evt) => {
             const likeButton = evt.target;
-            if (likeButton.classList.contains('cards__like-button_active')) {
+            if (likeButton.classList.contains(cardLikeButtonActiveSelector)) {
               api.deleteLike(item._id)
                 .then((res) => {
-                  likeButton.classList.remove('cards__like-button_active');
+                  likeButton.classList.remove(cardLikeButtonActiveSelector);
                   likeButton.querySelector('.cards__likes').textContent = res.likes.length;
                 })
                 .catch(err => {
@@ -50,7 +55,7 @@ Promise.all([api.getProfile(), api.getItems()])
             } else {
               api.addLike(item._id)
                 .then((res) => {
-                  likeButton.classList.add('cards__like-button_active');
+                  likeButton.classList.add(cardLikeButtonActiveSelector);
                   likeButton.querySelector('.cards__likes').textContent = res.likes.length;
                 })
                 .catch(err => {
@@ -61,12 +66,14 @@ Promise.all([api.getProfile(), api.getItems()])
           deleteCardHandler: (evt) => {
             const deleteButton = evt.target;
             const cardItem = deleteButton.closest('.photo');
-            // Добавить открытие модального окна
+            // Добавить метод открытия модального окна удаления карточки
           }
         }, cardSelector);
-      
-        cardsContainer.prepend(card.generate(userId));
-      });
+        const cardElement = card.generate(userId);
+        cardList.addItem(cardElement);
+      }
+    }, cardsSelector);
+    cardList.renderItems();
   })
   .catch(err => {
     console.log(`Ошибка: ${err.message}`);
