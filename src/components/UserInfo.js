@@ -1,5 +1,5 @@
 export default class UserInfo {
-  constructor({selectorName, selectorAbout}, getProfile, setProfile) {
+  constructor({ getProfile, setProfile }, selectorName, selectorAbout) {
     this._name = document.querySelector(selectorName);
     this._about = document.querySelector(selectorAbout);
     this._getProfile = getProfile;
