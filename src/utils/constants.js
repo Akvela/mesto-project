@@ -14,3 +14,4 @@ export const popupWithPhotoSelector = '#popup-image';
 export const popupAddNewCard = '#add-card';
 export const cardsSelector = '.cards__gallery';
 export const cardLikeButtonActiveSelector = 'cards__like-button_active';
+export const avatar = document.querySelector('.profile__avatar');

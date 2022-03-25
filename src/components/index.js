@@ -1,5 +1,5 @@
 import '../pages/index.css';
-import { editProfile, addNewCard, popupEditAvatar, buttonEditAvatar, formAvatarElement, editAvatar, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
+import { editProfile, buttonEditAvatar, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
 import { openPopup } from './utils.js';
 import { enableValidation, validationConfig } from './validate.js';
 import { Api } from './Api.js';
@@ -10,10 +10,10 @@ import PopupWithForm from './PopupWithForm';
 import { 
   popupWithPhotoSelector,
   cardsSelector,
+  avatar
 } from '../utils/constants.js';
 import { togglerLikeHandler } from '../utils/utils.js';
 
-const avatarProfile = document.querySelector('.profile__avatar');
 export let userId;
 
 export const api = new Api({
@@ -32,7 +32,7 @@ Promise.all([api.getProfile(), api.getItems()])
     nameProfile.textContent = userData.name;
     jobProfile.textContent = userData.about;
     userId = userData._id
-    avatarProfile.src = userData.avatar;
+    avatar.src = userData.avatar;
     cardList = new Section({
       items: cards,
       renderer: (item) => {
@@ -74,7 +74,6 @@ const addNewCardPopup = new PopupWithForm({
             // Добавить метод открытия модального окна удаления карточки
           }
         }, '#self-card');
-        console.log(cardList.addItem);
         cardList.addItem(newCard.generate(res.owner._id));
         this.closePopup();
         // disableButton(buttonAddCard, validationConfig)
@@ -88,11 +87,26 @@ const addNewCardPopup = new PopupWithForm({
   }
 }, '#add-card');
 
+const changeAvatarPopup = new PopupWithForm({
+  formSubmitHandler: function(inputValues) {
+    const avatarUrl = inputValues.urlAvatar;
+    // addLoading(buttonSaveAvatar);
+    api.changeAvatar(avatarUrl)
+      .then(res => {
+        avatar.src = res.avatar;
+        this.closePopup();
+        // disableButton(buttonSaveAvatar, validationConfig)
+      })
+      .catch(err => {
+        console.log(`Ошибка при обновлении аватара: ${err}`);
+      })
+      .finally(() => {
+        //deleteLoading(buttonSaveAvatar);
+      });
+  }
+}, '#edit-avatar');
+
 formInfoElement.addEventListener('submit', editProfile);
-
-//formCardElement.addEventListener('submit', addNewCard);
-
-formAvatarElement.addEventListener('submit', editAvatar);
 
 buttonEdit.addEventListener('click', function() {
   nameInput.value = nameProfile.textContent;
@@ -102,8 +116,6 @@ buttonEdit.addEventListener('click', function() {
 
 buttonPlus.addEventListener('click', () => addNewCardPopup.open());
 
-buttonEditAvatar.addEventListener('click', function() {
-  openPopup(popupEditAvatar);
-})
+buttonEditAvatar.addEventListener('click', () => changeAvatarPopup.open());
 
 enableValidation(validationConfig);

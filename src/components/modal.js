@@ -13,7 +13,6 @@ export const jobProfile = document.querySelector('.profile__text');
 export const popupEditAvatar = document.querySelector('#edit-avatar');
 export const buttonEditAvatar = document.querySelector('.profile__edit-avatar');
 export const buttonSaveAvatar = document.querySelector('.popup__button_type_edit');
-const avatar = document.querySelector('.profile__avatar');
 export const formAvatarElement = document.querySelector('#form-avatar');
 export const formCardElement = document.querySelector('[name="form-place"]');
 export const formInfoElement = document.querySelector('[name="form-info"]');
