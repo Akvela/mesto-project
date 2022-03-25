@@ -1,11 +1,12 @@
 import '../pages/index.css';
-import { editProfile, addNewCard, popupEditAvatar, buttonEditAvatar, formAvatarElement, editAvatar, formCardElement, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
+import { editProfile, addNewCard, popupEditAvatar, buttonEditAvatar, formAvatarElement, editAvatar, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
 import { openPopup } from './utils.js';
 import { enableValidation, validationConfig } from './validate.js';
 import { Api } from './Api.js';
 import Card from './Card1.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm';
 import { 
   popupWithPhotoSelector,
   cardsSelector,
@@ -79,9 +80,61 @@ Promise.all([api.getProfile(), api.getItems()])
     console.log(`Ошибка: ${err.message}`);
   });
 
+const addNewCardPopup = new PopupWithForm('#add-card', function(inputList) {
+  evt.preventDefault();
+  const nameItem = inputList.place.value;
+  const linkItem = inputList.urlCard.value;
+  // addLoading(buttonAddCard);
+  api.createItem(nameItem, linkItem)
+    .then(res => {
+      const newCard = new Card({ ...res,
+        openPopupHandler: () => popupWithImage.open(res.link, res.name),
+        handlerToggleLike: (evt) => {
+          const likeButton = evt.target;
+          if (likeButton.classList.contains(cardLikeButtonActiveSelector)) {
+            api.deleteLike(res._id)
+              .then((res) => {
+                likeButton.classList.remove(cardLikeButtonActiveSelector);
+                likeButton.querySelector('.cards__likes').textContent = res.likes.length;
+              })
+              .catch(err => {
+                console.log(`Ошибка при снятии лайка: ${err.message}`);
+              });
+          } else {
+            api.addLike(res._id)
+              .then((res) => {
+                likeButton.classList.add(cardLikeButtonActiveSelector);
+                likeButton.querySelector('.cards__likes').textContent = res.likes.length;
+              })
+              .catch(err => {
+                console.log(`Ошибка при постановке лайка: ${err.message}`);
+              });
+          }
+        },
+        deleteCardHandler: (evt) => {
+          const deleteButton = evt.target;
+          const cardItem = deleteButton.closest('.photo');
+          // Добавить метод открытия модального окна удаления карточки
+        }
+      }, cardSelector);
+      
+      closePopup(popupAddPlace);
+      placeInput.value = '';
+      urlCardInput.value = '';
+      disableButton(buttonAddCard, validationConfig)
+    })
+
+    .catch(err => {
+      console.log('Ошибка при отправке карточки');
+    })
+    .finally(() => {
+      //deleteLoading(buttonAddCard);
+    });
+}) 
+
 formInfoElement.addEventListener('submit', editProfile);
 
-formCardElement.addEventListener('submit', addNewCard);
+//formCardElement.addEventListener('submit', addNewCard);
 
 formAvatarElement.addEventListener('submit', editAvatar);
 
@@ -91,9 +144,9 @@ buttonEdit.addEventListener('click', function() {
   openPopup(popupEdit);
 });
 
-buttonPlus.addEventListener('click', function() {
-  openPopup(popupAddPlace);
-});
+// buttonPlus.addEventListener('click', function() {
+//   openPopup(popupAddPlace);
+// });
 
 buttonEditAvatar.addEventListener('click', function() {
   openPopup(popupEditAvatar);
