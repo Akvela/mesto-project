@@ -1,37 +1,18 @@
 export default class UserInfo {
-  constructor({ getProfile, setProfile }, selectorName, selectorAbout) {
-    this._name = document.querySelector(selectorName);
-    this._about = document.querySelector(selectorAbout);
-    this._getProfile = getProfile;
-    this._setProfile = setProfile;
+  constructor({selectorName, selectorAbout}) {
+    this._userName = document.querySelector(selectorName);
+    this._userAbout = document.querySelector(selectorAbout);
   }
 
   getUserInfo() {
-    return this._getProfile()
-      .then(userData => {
-        this._name.textContent = userData.name;
-        this._about.textContent = userData.about;
-        userId = userData._id
-        document.querySelector('.profile__avatar').src = userData.avatar;
-        return userData;
-      })
-      .catch(err => {
-        console.log(`Ошибка: ${err.message}`);
-      });
+    return {
+      name: this._userName.textContent,
+      about: this._userAbout.textContent
+    }
   }
 
-  setUserInfo() {
-    const userNameValue = this._name.value;
-    const userProfileValue = this._about.value;
-    
-    this._setProfile(userNameValue, userProfileValue)
-      .then(res => {
-        this._name.textContent = res.name;
-        this._about.textContent = res.about;
-        //closePopup(popupEdit);
-      })
-      .catch(err => {
-          console.log('Ошибка при редактировании профиля');
-      })
+  setUserInfo({ name, about }) {
+    this._userName.textContent = name;
+    this._userAbout.textContent = about;
   }
 }

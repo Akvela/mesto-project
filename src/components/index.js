@@ -1,12 +1,12 @@
 import '../pages/index.css';
-import { editProfile, buttonEditAvatar, formInfoElement, jobProfile, popupAddPlace, buttonEdit, popupEdit, nameProfile, buttonPlus, nameInput, jobInput } from './modal.js';
-import { openPopup } from './utils.js';
+import { editProfile, buttonEditAvatar, formInfoElement, popupAddPlace, buttonEdit, popupEdit, buttonPlus } from './modal.js';
 import { enableValidation, validationConfig } from './validate.js';
 import { Api } from './Api.js';
 import Card from './Card1.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm';
+import UserInfo from './UserInfo';
 import { 
   popupWithPhotoSelector,
   cardsSelector,
@@ -25,12 +25,21 @@ export const api = new Api({
 });
 
 const popupWithImage = new PopupWithImage(popupWithPhotoSelector);
+popupWithImage.setEventListeners();
 let cardList;
+
+const profile = new UserInfo({
+  selectorName: '.profile__nickname', 
+  selectorAbout: '.profile__text'
+});
+
 
 Promise.all([api.getProfile(), api.getItems()])
   .then(([userData, cards]) => {
-    nameProfile.textContent = userData.name;
-    jobProfile.textContent = userData.about;
+    profile.setUserInfo({
+      name: userData.name,
+      about: userData.about
+    })
     userId = userData._id
     avatar.src = userData.avatar;
     cardList = new Section({
@@ -106,16 +115,19 @@ const changeAvatarPopup = new PopupWithForm({
   }
 }, '#edit-avatar');
 
-formInfoElement.addEventListener('submit', editProfile);
+//formInfoElement.addEventListener('submit', editProfile);
 
-buttonEdit.addEventListener('click', function() {
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
-  openPopup(popupEdit);
-});
+// buttonEdit.addEventListener('click', function() {
+//   nameInput.value = nameProfile.textContent;
+//   jobInput.value = jobProfile.textContent;
+//   openPopup(popupEdit);
+// });
 
+addNewCardPopup.setEventListeners();
 buttonPlus.addEventListener('click', () => addNewCardPopup.open());
 
+
+changeAvatarPopup.setEventListeners();
 buttonEditAvatar.addEventListener('click', () => changeAvatarPopup.open());
 
 enableValidation(validationConfig);
