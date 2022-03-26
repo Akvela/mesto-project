@@ -1,16 +1,20 @@
-import '../pages/index.css';
-import { editProfile, buttonEditAvatar, formInfoElement, popupAddPlace, buttonEdit, popupEdit, buttonPlus } from './modal.js';
-import { enableValidation, validationConfig } from './validate.js';
-import { Api } from './Api.js';
-import Card from './Card1.js';
-import Section from './Section.js';
-import PopupWithImage from './PopupWithImage.js';
-import PopupWithForm from './PopupWithForm';
-import UserInfo from './UserInfo';
+import './index.css';
+import { enableValidation, validationConfig } from '../components/validate.js';
+import { Api } from '../components/Api.js';
+import Card from '../components/Card1.js';
+import Section from '../components/Section.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import PopupWithForm from '../components/PopupWithForm';
+import UserInfo from '../components/UserInfo';
 import { 
   popupWithPhotoSelector,
   cardsSelector,
-  avatar
+  avatar,
+  nameInput,
+  jobInput,
+  buttonEditAvatar,
+  buttonEdit,
+  buttonPlus
 } from '../utils/constants.js';
 import { togglerLikeHandler } from '../utils/utils.js';
 
@@ -70,7 +74,7 @@ const addNewCardPopup = new PopupWithForm({
   formSubmitHandler: function(inputValues) {
     const nameItem = inputValues.place;
     const linkItem = inputValues.urlCard;
-    // addLoading(buttonAddCard);
+    addNewCardPopup.addLoading();
     api.createItem(nameItem, linkItem)
       .then(res => {
         const newCard = new Card({
@@ -91,15 +95,38 @@ const addNewCardPopup = new PopupWithForm({
         console.log(`Ошибка при отправке карточки: ${err}`);
       })
       .finally(() => {
-        //deleteLoading(buttonAddCard);
+        addNewCardPopup.deleteLoading();
       });
   }
-}, '#add-card');
+}, '#add-card', '.popup__button_type_create');
+
+const editUserInfoPopup = new PopupWithForm({
+  formSubmitHandler: function(inputValues) {
+    const nameProfile = inputValues.nickname;
+    const jobProfile = inputValues.text;
+    editUserInfoPopup.addLoading();
+    api.changeProfile(nameProfile, jobProfile)
+      .then(res => {
+        profile.setUserInfo({
+          name: res.name, 
+          about: res.about
+        })
+        this.closePopup();
+        // disableButton(buttonSaveAvatar, validationConfig)
+      })
+      .catch(err => {
+        console.log(`Ошибка при редактировании профиля: ${err}`);
+      })
+      .finally(() => {
+        editUserInfoPopup.deleteLoading();
+      });
+  }
+}, '#edit-info', '.popup__button_type_save')
 
 const changeAvatarPopup = new PopupWithForm({
   formSubmitHandler: function(inputValues) {
     const avatarUrl = inputValues.urlAvatar;
-    // addLoading(buttonSaveAvatar);
+    changeAvatarPopup.addLoading();
     api.changeAvatar(avatarUrl)
       .then(res => {
         avatar.src = res.avatar;
@@ -110,18 +137,17 @@ const changeAvatarPopup = new PopupWithForm({
         console.log(`Ошибка при обновлении аватара: ${err}`);
       })
       .finally(() => {
-        //deleteLoading(buttonSaveAvatar);
+        changeAvatarPopup.deleteLoading();
       });
   }
-}, '#edit-avatar');
+}, '#edit-avatar', '.popup__button_type_edit');
 
-//formInfoElement.addEventListener('submit', editProfile);
-
-// buttonEdit.addEventListener('click', function() {
-//   nameInput.value = nameProfile.textContent;
-//   jobInput.value = jobProfile.textContent;
-//   openPopup(popupEdit);
-// });
+editUserInfoPopup.setEventListeners();
+buttonEdit.addEventListener('click', function() {
+  nameInput.value = profile.getUserInfo().name;
+  jobInput.value = profile.getUserInfo().about;
+  editUserInfoPopup.open();
+});
 
 addNewCardPopup.setEventListeners();
 buttonPlus.addEventListener('click', () => addNewCardPopup.open());
