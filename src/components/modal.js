@@ -1,4 +1,4 @@
-import { openPopup, closePopup } from './utils.js';
+
 import { cardsContainer, createCard } from './card.js';
 import { disableButton, validationConfig } from './validate.js';
 import { Api } from './Api.js';
@@ -41,76 +41,76 @@ function deleteLoading(button) {
   }
 };
 
-export function editProfile(evt) {
-  evt.preventDefault();
-  const nameProfileId = nameInput.value;
-  const jobProfileId = jobInput.value;
-  addLoading(buttonEditProfile);
-  api.changeProfile(nameProfileId, jobProfileId)
-    .then(res => {
-      nameProfile.textContent = res.name;
-      jobProfile.textContent = res.about;
-      closePopup(popupEdit);
-    })
-    .catch(err => {
-        console.log('Ошибка при редактировании профиля');
-    })
-    .finally(() => {
-      deleteLoading(buttonEditProfile);
-    }); 
-};
+// export function editProfile(evt) {
+//   evt.preventDefault();
+//   const nameProfileId = nameInput.value;
+//   const jobProfileId = jobInput.value;
+//   addLoading(buttonEditProfile);
+//   api.changeProfile(nameProfileId, jobProfileId)
+//     .then(res => {
+//       nameProfile.textContent = res.name;
+//       jobProfile.textContent = res.about;
+//       closePopup(popupEdit);
+//     })
+//     .catch(err => {
+//         console.log('Ошибка при редактировании профиля');
+//     })
+//     .finally(() => {
+//       deleteLoading(buttonEditProfile);
+//     }); 
+// };
 
-const popupUrl = document.querySelector('.popup__image');
-const popupName = document.querySelector('.popup__name');
+// const popupUrl = document.querySelector('.popup__image');
+// const popupName = document.querySelector('.popup__name');
 
-export function showPhoto(event) {
-  popupUrl.src = event.target.src;
-  popupUrl.alt = event.target.alt;
-  popupName.textContent = event.target.alt;
-  openPopup(popupPhoto);
-};
+// export function showPhoto(event) {
+//   popupUrl.src = event.target.src;
+//   popupUrl.alt = event.target.alt;
+//   popupName.textContent = event.target.alt;
+//   openPopup(popupPhoto);
+// };
 
-const placeInput = document.querySelector('[name="place"]');
-const urlCardInput = document.querySelector('[name="url-card"]');
+// const placeInput = document.querySelector('[name="place"]');
+// const urlCardInput = document.querySelector('[name="url-card"]');
 
-export function addNewCard(evt) {
-  evt.preventDefault();
-  const nameItem = placeInput.value;
-  const linkItem = urlCardInput.value;
-  addLoading(buttonAddCard);
-  api.createItem(nameItem, linkItem)
-    .then(res => {
-      cardsContainer.prepend(createCard(res.name, res.link, res._id, res.owner._id, res.likes));
-      closePopup(popupAddPlace);
-      placeInput.value = '';
-      urlCardInput.value = '';
-      disableButton(buttonAddCard, validationConfig);
-    })
-    .catch(err => {
-      console.log('Ошибка при отправке карточки');
-    })
-    .finally(() => {
-      deleteLoading(buttonAddCard);
-    });
-};
+// export function addNewCard(evt) {
+//   evt.preventDefault();
+//   const nameItem = placeInput.value;
+//   const linkItem = urlCardInput.value;
+//   addLoading(buttonAddCard);
+//   api.createItem(nameItem, linkItem)
+//     .then(res => {
+//       cardsContainer.prepend(createCard(res.name, res.link, res._id, res.owner._id, res.likes));
+//       closePopup(popupAddPlace);
+//       placeInput.value = '';
+//       urlCardInput.value = '';
+//       disableButton(buttonAddCard, validationConfig);
+//     })
+//     .catch(err => {
+//       console.log('Ошибка при отправке карточки');
+//     })
+//     .finally(() => {
+//       deleteLoading(buttonAddCard);
+//     });
+// };
 
-const avatarInput = document.querySelector('[name="url-avatar"]');
+// const avatarInput = document.querySelector('[name="url-avatar"]');
 
-export function editAvatar(evt) {
-  evt.preventDefault();
-  const avatarUrl = avatarInput.value;
-  addLoading(buttonSaveAvatar);
-  api.changeAvatar(avatarUrl)
-    .then(res => {
-      avatar.src = res.avatar;
-      closePopup(popupEditAvatar);
-      avatarInput.value = '';
-      disableButton(buttonSaveAvatar, validationConfig);
-    })
-    .catch(err => {
-      console.log('Ошибка при обновлении аватара');
-    })
-    .finally(() => {
-      deleteLoading(buttonSaveAvatar);
-    });
-};
+// export function editAvatar(evt) {
+//   evt.preventDefault();
+//   const avatarUrl = avatarInput.value;
+//   addLoading(buttonSaveAvatar);
+//   api.changeAvatar(avatarUrl)
+//     .then(res => {
+//       avatar.src = res.avatar;
+//       closePopup(popupEditAvatar);
+//       avatarInput.value = '';
+//       disableButton(buttonSaveAvatar, validationConfig);
+//     })
+//     .catch(err => {
+//       console.log('Ошибка при обновлении аватара');
+//     })
+//     .finally(() => {
+//       deleteLoading(buttonSaveAvatar);
+//     });
+// };
