@@ -1,11 +1,12 @@
-import Popup from "./Popup";
+import Popup from "./Popup.js";
+import { validationConfig } from '../utils/constants.js';
 
 export default class PopupWithForm extends Popup{
-  constructor({ formSubmitHandler }, popupSelector, buttonSelector) {
+  constructor({ formSubmitHandler }, popupSelector) {
     super(popupSelector);
     this._formSubmitHandler = formSubmitHandler;
     this._formElement = this._popup.querySelector('.popup__form');
-    this._buttonSelector = this._popup.querySelector(buttonSelector);
+    this._submitButtonElement = this._popup.querySelector(validationConfig.buttonSelector);
   }
 
   _getInputValues() {
@@ -17,7 +18,7 @@ export default class PopupWithForm extends Popup{
 
     return this._formValues;
   }
-  
+
   setEventListeners() {
     super.setEventListeners();
     this._formElement.addEventListener('submit', evt => {
@@ -30,17 +31,5 @@ export default class PopupWithForm extends Popup{
   closePopup() {
     super.closePopup();
     this._formElement.reset();
-  }
-
-  addLoading() {
-    this._buttonSelector.textContent = 'Сохранение...';
-  }
-
-  deleteLoading() {
-    if (this._buttonSelector === this._popup.querySelector('.popup__button_type_create')) {
-      this._buttonSelector.textContent = 'Создать';
-    } else {
-      this._buttonSelector.textContent = 'Сохранить';
-    }
   }
 }

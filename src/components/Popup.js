@@ -31,4 +31,12 @@ export default class Popup {
   setEventListeners() {
     this._popup.addEventListener('click', this._handleClickOverlay);
   }
+
+  addLoading() {
+    this._submitButtonElement.textContent = 'Сохранение...';
+  }
+
+  deleteLoading(buttonContent) {
+      this._submitButtonElement.textContent = buttonContent;
+  }
 }
