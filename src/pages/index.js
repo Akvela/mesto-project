@@ -1,10 +1,11 @@
 import './index.css';
 import { enableValidation, validationConfig } from '../components/validate.js';
 import { Api } from '../components/Api.js';
-import Card from '../components/Card1.js';
+import Card from '../components/Card.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
-import PopupWithForm from '../components/PopupWithForm';
+import PopupWithForm from '../components/PopupWithForm.js';
+import ConfirmPopup from '../components/ConfirmPopup.js';
 import UserInfo from '../components/UserInfo';
 import { 
   popupWithPhotoSelector,
@@ -18,10 +19,8 @@ import {
 } from '../utils/constants.js';
 import { togglerLikeHandler } from '../utils/utils.js';
 
-export let userId;
-
 export const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort7',
+  baseUrl: 'https://mesto.nomoreparties.co/v1/plus-cohort7',
   headers: {
     authorization: '8ced4900-b351-425e-b929-76d82504c0ac',
     'Content-Type': 'application/json'
@@ -37,6 +36,20 @@ const profile = new UserInfo({
   selectorAbout: '.profile__text'
 });
 
+const confirmPopup = new ConfirmPopup({
+  formSubmitHandler: (cardId) => {
+    confirmPopup.addLoading();
+    api.deleteItem(cardId)
+      .then(() => {
+        const cardElement = document.getElementById(cardId);
+        cardElement.remove();
+        confirmPopup.closePopup();
+      })
+      .catch(err => console.log(`Ошибка удаления карточки: ${err}`))
+      .finally(() => confirmPopup.deleteLoading('Да'));
+  }
+}, '#popup-confirm-delete');
+confirmPopup.setEventListeners();
 
 Promise.all([api.getProfile(), api.getItems()])
   .then(([userData, cards]) => {
@@ -44,7 +57,7 @@ Promise.all([api.getProfile(), api.getItems()])
       name: userData.name,
       about: userData.about
     })
-    userId = userData._id
+    const userId = userData._id
     avatar.src = userData.avatar;
     cardList = new Section({
       items: cards,
@@ -54,10 +67,9 @@ Promise.all([api.getProfile(), api.getItems()])
           ...item,
           openPopupHandler: () => popupWithImage.open(item.link, item.name),
           handlerToggleLike: (evt) => togglerLikeHandler(evt, item, api),
-          deleteCardHandler: (evt) => {
-            const deleteButton = evt.target;
-            const cardItem = deleteButton.closest('.photo');
-            // Добавить метод открытия модального окна удаления карточки
+          deleteCardHandler: () => {
+            confirmPopup.open();
+            confirmPopup.setCardId(item._id);
           }
         }, cardSelector);
         const cardElement = card.generate(userId);
@@ -81,24 +93,22 @@ const addNewCardPopup = new PopupWithForm({
           ...res,
           openPopupHandler: () => popupWithImage.open(newCard._link, newCard._name),
           handlerToggleLike: (evt) => togglerLikeHandler(evt, newCard, api),
-          deleteCardHandler: (evt) => {
-            const deleteButton = evt.target;
-            const cardItem = deleteButton.closest('.photo');
-            // Добавить метод открытия модального окна удаления карточки
+          deleteCardHandler: () => {
+            confirmPopup.open();
+            confirmPopup.setCardId(res._id);
           }
         }, '#self-card');
         cardList.addItem(newCard.generate(res.owner._id));
         this.closePopup();
-        // disableButton(buttonAddCard, validationConfig)
       })
       .catch(err => {
         console.log(`Ошибка при отправке карточки: ${err}`);
       })
       .finally(() => {
-        addNewCardPopup.deleteLoading();
+        addNewCardPopup.deleteLoading('Создать');
       });
   }
-}, '#add-card', '.popup__button_type_create');
+}, '#add-card');
 
 const editUserInfoPopup = new PopupWithForm({
   formSubmitHandler: function(inputValues) {
@@ -112,16 +122,15 @@ const editUserInfoPopup = new PopupWithForm({
           about: res.about
         })
         this.closePopup();
-        // disableButton(buttonSaveAvatar, validationConfig)
       })
       .catch(err => {
         console.log(`Ошибка при редактировании профиля: ${err}`);
       })
       .finally(() => {
-        editUserInfoPopup.deleteLoading();
+        editUserInfoPopup.deleteLoading('Сохранить');
       });
   }
-}, '#edit-info', '.popup__button_type_save')
+}, '#edit-info')
 
 const changeAvatarPopup = new PopupWithForm({
   formSubmitHandler: function(inputValues) {
@@ -131,16 +140,15 @@ const changeAvatarPopup = new PopupWithForm({
       .then(res => {
         avatar.src = res.avatar;
         this.closePopup();
-        // disableButton(buttonSaveAvatar, validationConfig)
       })
       .catch(err => {
         console.log(`Ошибка при обновлении аватара: ${err}`);
       })
       .finally(() => {
-        changeAvatarPopup.deleteLoading();
+        changeAvatarPopup.deleteLoading('Сохранить');
       });
   }
-}, '#edit-avatar', '.popup__button_type_edit');
+}, '#edit-avatar');
 
 editUserInfoPopup.setEventListeners();
 buttonEdit.addEventListener('click', function() {
