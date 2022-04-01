@@ -10,7 +10,6 @@ import FormValidator from '../components/FormValidator.js';
 import { 
   popupWithPhotoSelector,
   cardsSelector,
-  avatar,
   nameInput,
   jobInput,
   buttonEditAvatar,
@@ -31,10 +30,12 @@ export const api = new Api({
 const popupWithImage = new PopupWithImage(popupWithPhotoSelector);
 popupWithImage.setEventListeners();
 let cardList;
+let userId;
 
 const profile = new UserInfo({
   selectorName: '.profile__nickname', 
-  selectorAbout: '.profile__text'
+  selectorAbout: '.profile__text',
+  selectorAvatar: '.profile__avatar'
 });
 
 const confirmPopup = new ConfirmPopup({
@@ -58,9 +59,8 @@ Promise.all([api.getProfile(), api.getItems()])
     profile.setUserInfo({
       name: userData.name,
       about: userData.about
-    })
-    const userId = userData._id
-    avatar.src = userData.avatar;
+    }, userId = userData._id);
+    profile.setUserAvatar({ avatar: userData.avatar });
     cardList = new Section({
       items: cards,
       renderer: (item) => {
@@ -101,7 +101,7 @@ const addNewCardPopup = new PopupWithForm({
           }
         }, '#self-card');
         cardList.addItem(newCard.generate(res.owner._id));
-        this.closePopup();
+        addNewCardPopup.closePopup();
       })
       .catch(err => {
         console.log(`Ошибка при отправке карточки: ${err}`);
@@ -123,7 +123,7 @@ const editUserInfoPopup = new PopupWithForm({
           name: res.name, 
           about: res.about
         })
-        this.closePopup();
+        editUserInfoPopup.closePopup();
       })
       .catch(err => {
         console.log(`Ошибка при редактировании профиля: ${err}`);
@@ -140,8 +140,8 @@ const changeAvatarPopup = new PopupWithForm({
     changeAvatarPopup.addLoading();
     api.changeAvatar(avatarUrl)
       .then(res => {
-        avatar.src = res.avatar;
-        this.closePopup();
+        profile.setUserAvatar({ avatar: res.avatar });
+        changeAvatarPopup.closePopup();
       })
       .catch(err => {
         console.log(`Ошибка при обновлении аватара: ${err}`);
@@ -152,31 +152,37 @@ const changeAvatarPopup = new PopupWithForm({
   }
 }, '#edit-avatar');
 
-const userInfoFormValidator = new FormValidator(validationConfig, editUserInfoPopup.getFormElement());
-const userAvatarFormValidator = new FormValidator(validationConfig, changeAvatarPopup.getFormElement());
-const addCardFormValidator = new FormValidator(validationConfig, addNewCardPopup.getFormElement());
+const formValidators = {}
 
-userInfoFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
-userAvatarFormValidator.enableValidation();
+const enableValidation = (сonfig) => {
+  const formList = Array.from(document.querySelectorAll(сonfig.formSelector))
+  formList.forEach((formElement) => {
+    const validator = new FormValidator(сonfig, formElement);
+    const formName = formElement.getAttribute('name');
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+
+enableValidation(validationConfig);
 
 editUserInfoPopup.setEventListeners();
 buttonEdit.addEventListener('click', function() {
-  nameInput.value = profile.getUserInfo().name;
-  jobInput.value = profile.getUserInfo().about;
-  userInfoFormValidator.resetValidation();
+  const {name, about} = profile.getUserInfo();
+  nameInput.value = name;
+  jobInput.value = about;
+  formValidators['form-info'].resetValidation();
   editUserInfoPopup.open();
 });
 
 addNewCardPopup.setEventListeners();
 buttonPlus.addEventListener('click', () => {
-  addCardFormValidator.resetValidation();
+  formValidators['form-place'].resetValidation();
   addNewCardPopup.open();
 });
 
-
 changeAvatarPopup.setEventListeners();
 buttonEditAvatar.addEventListener('click', () => {
-  userAvatarFormValidator.resetValidation();
+  formValidators['form-avatar'].resetValidation();
   changeAvatarPopup.open();
 });
