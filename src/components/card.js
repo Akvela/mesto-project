@@ -1,13 +1,13 @@
 import { cardPhotoSelector } from '../utils/constants.js';
 
 export default class Card {
-  constructor({ link, name, _id, likes, openPopupHandler, handlerToggleLike, deleteCardHandler }, selector) {
+  constructor({ link, name, _id, likes, openPopupHandler, toggleLikeHandler, deleteCardHandler }, selector) {
     this._link = link;
     this._name = name;
     this._id = _id;
     this._likes = likes;
     this._selector = selector;
-    this._handlerToggleLike = handlerToggleLike;
+    this._toggleLikeHandler = toggleLikeHandler;
     this._openPopupHandler = openPopupHandler;
     this._deleteCardHandler = deleteCardHandler;
   }
@@ -28,7 +28,7 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._likeButton.addEventListener('click', this._handlerToggleLike);
+    this._likeButton.addEventListener('click', this._toggleLikeHandler);
     this._element.querySelector(cardPhotoSelector).addEventListener('click', this._openPopupHandler);
     if (this._selector === '#self-card') {
       this._element.querySelector('.cards__trash-button').addEventListener('click', this._deleteCardHandler);
