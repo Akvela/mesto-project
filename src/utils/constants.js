@@ -14,7 +14,6 @@ export const popupWithPhotoSelector = '#popup-image';
 export const popupAddNewCard = '#add-card';
 export const cardsSelector = '.cards__gallery';
 export const cardLikeButtonActiveSelector = 'cards__like-button_active';
-export const avatar = document.querySelector('.profile__avatar');
 export const nameInput = document.querySelector('[name="nickname"]');
 export const jobInput = document.querySelector('[name="text"]');
 export const buttonEditAvatar = document.querySelector('.profile__edit-avatar');
