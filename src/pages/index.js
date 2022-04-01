@@ -17,7 +17,7 @@ import {
   buttonPlus,
   validationConfig
 } from '../utils/constants.js';
-import { togglerLikeHandler } from '../utils/utils.js';
+import { toggleLike } from '../utils/utils.js';
 
 export const api = new Api({
   baseUrl: 'https://mesto.nomoreparties.co/v1/plus-cohort7',
@@ -54,6 +54,18 @@ const confirmPopup = new ConfirmPopup({
 
 confirmPopup.setEventListeners();
 
+const createCard = function({ link, name, _id, likes }, cardSelector) {
+  return new Card({
+    link, name, _id, likes,
+    openPopupHandler: () => popupWithImage.open(link, name),
+    toggleLikeHandler: (evt) => toggleLike(evt, _id, api),
+    deleteCardHandler: () => {
+      confirmPopup.open();
+      confirmPopup.setCardId(_id);
+    }
+  }, cardSelector);
+}
+
 Promise.all([api.getProfile(), api.getItems()])
   .then(([userData, cards]) => {
     profile.setUserInfo({
@@ -65,15 +77,7 @@ Promise.all([api.getProfile(), api.getItems()])
       items: cards,
       renderer: (item) => {
         const cardSelector = userId === item.owner._id ? '#self-card' : '#card';
-        const card = new Card({
-          ...item,
-          openPopupHandler: () => popupWithImage.open(item.link, item.name),
-          handlerToggleLike: (evt) => togglerLikeHandler(evt, item, api),
-          deleteCardHandler: () => {
-            confirmPopup.open();
-            confirmPopup.setCardId(item._id);
-          }
-        }, cardSelector);
+        const card = createCard({ ...item }, cardSelector);
         const cardElement = card.generate(userId);
         cardList.addItem(cardElement);
       }
@@ -85,21 +89,13 @@ Promise.all([api.getProfile(), api.getItems()])
   });
 
 const addNewCardPopup = new PopupWithForm({
-  formSubmitHandler: function(inputValues) {
+  submitFormHandler: (inputValues) => {
     const nameItem = inputValues.place;
     const linkItem = inputValues.urlCard;
     addNewCardPopup.addLoading();
     api.createItem(nameItem, linkItem)
       .then(res => {
-        const newCard = new Card({
-          ...res,
-          openPopupHandler: () => popupWithImage.open(newCard._link, newCard._name),
-          handlerToggleLike: (evt) => togglerLikeHandler(evt, newCard, api),
-          deleteCardHandler: () => {
-            confirmPopup.open();
-            confirmPopup.setCardId(res._id);
-          }
-        }, '#self-card');
+        const newCard = createCard({ ...res }, '#self-card');
         cardList.addItem(newCard.generate(res.owner._id));
         addNewCardPopup.closePopup();
       })
