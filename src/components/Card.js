@@ -8,14 +8,15 @@ export default class Card {
     this._toggleLikeHandler = toggleLikeHandler;
     this._openPopupHandler = openPopupHandler;
     this._deleteCardHandler = deleteCardHandler;
+    this._element = document.querySelector(this._selector).content.querySelector('.cards__item').cloneNode(true);
+    this._cardImage = this._element.querySelector('.cards__photo');
+    this._cardName = this._element.querySelector('.cards__name');
+    this._cardLikes = this._element.querySelector('.cards__likes');
+    this._likeButton = this._element.querySelector('.cards__like-button');
   }
 
   _getElement() {
-    return document
-      .querySelector(this._selector)
-      .content
-      .querySelector('.cards__item')
-      .cloneNode(true);
+    return this._element;
   }
 
   _setLike(userId) {
@@ -34,14 +35,11 @@ export default class Card {
   }
 
   generate(userId) {
-    this._element = this._getElement();
-    this._cardImage = this._element.querySelector('.cards__photo');
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
-    this._element.querySelector('.cards__name').textContent = this._name;
+    this._cardName.textContent = this._name;
     this._element.id = this._id;
-    this._element.querySelector('.cards__likes').textContent = this._likes.length;
-    this._likeButton = this._element.querySelector('.cards__like-button');
+    this._cardLikes.textContent = this._likes.length;
     this._setLike(userId);
     this._setEventListeners(userId);
 
