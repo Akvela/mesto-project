@@ -30,7 +30,7 @@ export const api = new Api({
 const popupWithImage = new PopupWithImage(popupWithPhotoSelector);
 popupWithImage.setEventListeners();
 let cardList;
-let userId;
+let userId = '';
 
 const profile = new UserInfo({
   selectorName: '.profile__nickname', 

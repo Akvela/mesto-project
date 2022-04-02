@@ -1,5 +1,3 @@
-import { cardPhotoSelector } from '../utils/constants.js';
-
 export default class Card {
   constructor({ link, name, _id, likes, openPopupHandler, toggleLikeHandler, deleteCardHandler }, selector) {
     this._link = link;
@@ -29,7 +27,7 @@ export default class Card {
 
   _setEventListeners() {
     this._likeButton.addEventListener('click', this._toggleLikeHandler);
-    this._element.querySelector(cardPhotoSelector).addEventListener('click', this._openPopupHandler);
+    this._cardImage.addEventListener('click', this._openPopupHandler);
     if (this._selector === '#self-card') {
       this._element.querySelector('.cards__trash-button').addEventListener('click', this._deleteCardHandler);
     }
@@ -37,8 +35,9 @@ export default class Card {
 
   generate(userId) {
     this._element = this._getElement();
-    this._element.querySelector(cardPhotoSelector).src = this._link;
-    this._element.querySelector(cardPhotoSelector).alt = this._name;
+    this._cardImage = this._element.querySelector('.cards__photo');
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._name;
     this._element.querySelector('.cards__name').textContent = this._name;
     this._element.id = this._id;
     this._element.querySelector('.cards__likes').textContent = this._likes.length;

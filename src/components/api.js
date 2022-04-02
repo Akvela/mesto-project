@@ -3,7 +3,7 @@ export default class Api {
     this._url = options.baseUrl,
     this._headers = options.headers
   }
-  _responseHandler(res) {
+  _checkResponse(res) {
     if (res.ok) {
       return res.json();
     } else {
@@ -15,7 +15,7 @@ export default class Api {
     return fetch(`${this._url}/users/me`, {
       headers: this._headers,
     })
-      .then(res => this._responseHandler(res));
+      .then(res => this._checkResponse(res));
   }
 
   changeProfile(name, about) {
@@ -28,14 +28,14 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(info)
     })
-      .then(res => this._responseHandler(res));
+      .then(res => this._checkResponse(res));
   }
 
   getItems() {
     return fetch(`${this._url}/cards`, {
       headers: this._headers,
     })
-      .then(res => this._responseHandler(res));
+      .then(res => this._checkResponse(res));
   }
 
   createItem(item, link) {
@@ -48,7 +48,7 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(data)
     })
-      .then(res => this._responseHandler(res));
+      .then(res => this._checkResponse(res));
   }
 
   deleteItem(id) {
@@ -56,7 +56,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
-      .then((res) => this._responseHandler(res));
+      .then((res) => this._checkResponse(res));
   }
 
   addLike(id) {
@@ -64,7 +64,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers,
     })
-      .then(res => this._responseHandler(res));
+      .then(res => this._checkResponse(res));
   }
 
   deleteLike(id) {
@@ -72,7 +72,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then(res => this._responseHandler(res));
+      .then(res => this._checkResponse(res));
   }
 
   changeAvatar(item) {
@@ -84,6 +84,6 @@ export default class Api {
       headers: this._headers,
       body: JSON.stringify(picture)
     })
-      .then(res => this._responseHandler(res));
+      .then(res => this._checkResponse(res));
   }
 }
