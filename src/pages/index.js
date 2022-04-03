@@ -134,7 +134,7 @@ const changeAvatarPopup = new PopupWithForm({
     changeAvatarPopup.addLoading();
     api.changeAvatar(avatarUrl)
       .then(res => {
-        profile.setUserAvatar({ avatar: res.avatar });
+        profile.setUserInfo({ avatar: res.avatar });
         changeAvatarPopup.closePopup();
       })
       .catch(err => {
