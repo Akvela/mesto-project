@@ -71,7 +71,6 @@ Promise.all([api.getProfile(), api.getItems()])
       about: userData.about,
       avatar: userData.avatar
     }, userId = userData._id);
-    //profile.setUserAvatar({ avatar: userData.avatar });
     cardList = new Section({
       items: cards,
       renderer: (item) => {
