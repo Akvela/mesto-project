@@ -10,8 +10,6 @@ import FormValidator from '../components/FormValidator.js';
 import { 
   popupWithPhotoSelector,
   cardsSelector,
-  nameInput,
-  jobInput,
   buttonEditAvatar,
   buttonEdit,
   buttonPlus,
@@ -39,7 +37,7 @@ const profile = new UserInfo({
 });
 
 const confirmPopup = new ConfirmPopup({
-  formSubmitHandler: (cardId) => {
+  submitFormHandler: (cardId) => {
     confirmPopup.addLoading();
     api.deleteItem(cardId)
       .then(() => {
@@ -70,9 +68,10 @@ Promise.all([api.getProfile(), api.getItems()])
   .then(([userData, cards]) => {
     profile.setUserInfo({
       name: userData.name,
-      about: userData.about
+      about: userData.about,
+      avatar: userData.avatar
     }, userId = userData._id);
-    profile.setUserAvatar({ avatar: userData.avatar });
+    //profile.setUserAvatar({ avatar: userData.avatar });
     cardList = new Section({
       items: cards,
       renderer: (item) => {
@@ -109,9 +108,9 @@ const addNewCardPopup = new PopupWithForm({
 }, '#add-card');
 
 const editUserInfoPopup = new PopupWithForm({
-  formSubmitHandler: function(inputValues) {
-    const nameProfile = inputValues.nickname;
-    const jobProfile = inputValues.text;
+  submitFormHandler: (inputValues) => {
+    const nameProfile = inputValues.name;
+    const jobProfile = inputValues.about;
     editUserInfoPopup.addLoading();
     api.changeProfile(nameProfile, jobProfile)
       .then(res => {
@@ -131,7 +130,7 @@ const editUserInfoPopup = new PopupWithForm({
 }, '#edit-info')
 
 const changeAvatarPopup = new PopupWithForm({
-  formSubmitHandler: function(inputValues) {
+  submitFormHandler: (inputValues) => {
     const avatarUrl = inputValues.urlAvatar;
     changeAvatarPopup.addLoading();
     api.changeAvatar(avatarUrl)
@@ -164,9 +163,7 @@ enableValidation(validationConfig);
 
 editUserInfoPopup.setEventListeners();
 buttonEdit.addEventListener('click', function() {
-  const {name, about} = profile.getUserInfo();
-  nameInput.value = name;
-  jobInput.value = about;
+  editUserInfoPopup.setInputValues(profile.getUserInfo());
   formValidators['form-info'].resetValidation();
   editUserInfoPopup.open();
 });
