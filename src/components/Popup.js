@@ -13,13 +13,13 @@ export default class Popup {
   _handleEscClose = (evt) => {
     if (evt.keyCode == buttonEscKeyCode) {
       evt.preventDefault();
-      this.closePopup(this._popup);
+      this.closePopup();
     };
   }
 
   _handleClickOverlay = (evt) => {
     if (evt.target.classList.contains('popup') || evt.target.classList.contains('popup__exit-button')) {
-      this.closePopup(this._popup);
+      this.closePopup();
     };
   }
 
@@ -33,10 +33,14 @@ export default class Popup {
   }
 
   addLoading() {
-    this._submitButtonElement.textContent = 'Сохранение...';
+    if (this._submitButtonElement) {
+      this._submitButtonElement.textContent = 'Сохранение...';
+    }
   }
 
   deleteLoading(buttonContent) {
+    if (this._submitButtonElement) {
       this._submitButtonElement.textContent = buttonContent;
+    }
   }
 }
