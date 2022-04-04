@@ -34,11 +34,11 @@
           <form name="form-info" id="form-info" class="popup__form" novalidate>
             <fieldset class="popup__input-container">
               <label class="input-container">
-                <input type="text" class="popup__item" id="nickname" name="nickname" placeholder="Имя" value="Жак-Ив Кусто" minlength="2" maxlength="40" required>
+                <input type="text" class="popup__item" id="nickname" name="name" placeholder="Имя" minlength="2" maxlength="40" required>
                 <span id="error-nickname" class="popup__error-message"></span>
               </label>
               <label class="input-container">
-                <input type="text" class="popup__item" id="text" name="text" placeholder="О себе" value="Исследователь океана" minlength="2" maxlength="200" required>
+                <input type="text" class="popup__item" id="text" name="about" placeholder="О себе" minlength="2" maxlength="200" required>
                 <span id="error-text" class="popup__error-message"></span>
               </label>
             </fieldset> 
@@ -54,7 +54,7 @@
           <form name="form-avatar" id="form-avatar" class="popup__form" novalidate>
             <fieldset class="popup__input-container">
               <label class="input-container">
-                <input type="url" class="popup__item" id="url-avatar" name="url-avatar" placeholder="Ссылка на картинку" required>
+                <input type="url" class="popup__item" id="url-avatar" name="urlAvatar" placeholder="Ссылка на картинку" required>
                 <span id="error-url-avatar" class="popup__error-message"></span>
               </label>
             </fieldset>
@@ -74,7 +74,7 @@
                 <span id="error-place" class="popup__error-message"></span>
               </label>
               <label class="input-container">
-                <input type="url" class="popup__item" id="url-card" name="url-card" placeholder="Ссылка на картинку" required>
+                <input type="url" class="popup__item" id="url-card" name="urlCard" placeholder="Ссылка на картинку" required>
                 <span id="error-url-card" class="popup__error-message"></span>
               </label>
             </fieldset> 
@@ -91,18 +91,40 @@
           <button type="button" class="popup__exit-button" aria-label="Выйти"></button>
         </div>
       </div>
+
+
+      <div class="popup" id="popup-confirm-delete">
+        <div class="popup__container">
+          <h2 class="popup__heading">Вы уверены?</h2>
+          <form name="form-delete" id="form-delete" class="popup__form" novalidate>
+            <button type="submit" class="popup__button popup__button_type_create" aria-label="Подтвердить удаление">Да</button>
+          </form>
+          <button type="button" class="popup__exit-button" aria-label="Выйти"></button>
+        </div>
+      </div>
     </main>
 
-    <template id="card">
+    <template id="self-card">
       <div class="cards__item">  
         <button type="button" class="cards__trash-button" aria-label="Удалить"></button>
         <img src="" class="cards__photo" alt="">
         <div class="cards__info">
           <h2 class="cards__name"></h2>
-          <div class="cards__container">
-            <button type="button" class="cards__like-button" aria-label="Нравится"></button>
-            <div class="cards__likes">0</div>
-          </div>
+          <button type="button" class="cards__like-button" aria-label="Нравится">
+            <span class="cards__likes"></span>
+          </button>
+        </div>
+      </div>
+    </template>
+
+    <template id="card">
+      <div class="cards__item">  
+        <img src="" class="cards__photo" alt="">
+        <div class="cards__info">
+          <h2 class="cards__name"></h2>
+          <button type="button" class="cards__like-button" aria-label="Нравится">
+            <span class="cards__likes"></span>
+          </button>
         </div>
       </div>
     </template>

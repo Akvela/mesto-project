@@ -1,16 +1,17 @@
 .cards__like-button {
+  align-self: center;
   background-image: url(../../../images/union_v.svg);
-  background-color: transparent;
-  width: 22px;
-  height: 19px;
-  background-size: contain;
-  background-repeat: no-repeat;
-  opacity: 1;
-  transition: opacity .3s ease-in;
   display: block;
+  padding-top: 17px;
+  width: 22px;
+  background-color: initial;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: top center;
+  border: none;
+  box-sizing: border-box;
+  transition: opacity .3s ease;
   cursor: pointer;
-  border: 0;
-  padding: 0;
 }
 
 .cards__like-button:hover {
